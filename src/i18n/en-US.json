@@ -1,0 +1,197 @@
+{
+    "name": "GoCrack",
+    "navbar": {
+        "list_tasks": "Lists Tasks",
+        "create_task": "Create Task",
+        "file_mgr": "File Manager",
+        "engine_files": "Engine Files",
+        "task_files": "Task Files",
+        "admin": "Admin Settings",
+        "users": "Users",
+        "edit_user": "Edit User"
+    },
+    "login": {
+        "header": "Log In",
+        "placeholder_username": "Enter your username",
+        "placeholder_password": "Enter your password",
+        "button_login": "Login",
+        "register": "Register",
+        "validation": {
+            "user_required": "Username is required",
+            "user_min_length": "Username must be at least 4 characters",
+            "email_required": "E-Mail is required",
+            "email_valid": "E-Mail must be valid",
+            "password_required": "Password is required",
+            "password_min_length": "Password must be at least 6 characters"
+        },
+        "username": "Username",
+        "email": "E-Mail",
+        "password": "Password"
+    },
+    "errors": {
+        "unauthorized": "Unauthorized",
+        "unauthorized_text": "You do not have access to the requested resource",
+        "header_server_error": "Server Error",
+        "default_server_error": "An unknown server error occured. Please contact your site administrator",
+        "upload_in_progress": "An upload is in progress. Please wait..."
+    },
+    "create_task": {
+        "placeholder_casecode": "CC-1337",
+        "description_casecode": "The MPR or MFR number for the engagement.",
+        "taskname": "Task Name",
+        "placeholder_taskname": "Responder-Workstation-2017-03-27",
+        "description_taskname": "Descriptive name for the task within the case. This can be simply a number (like 1, 2, etc), but it is better if you give it a more descriptive name for where the hashes came from (like Responder-Workstation-2017-03-27 indicating the network segment and date when the Responder tool was run).",
+        "placeholder_comment": "Put any notes here that you'd like others to see...",
+        "devices": "Use Devices",
+        "placeholder_devices": "Select Devices (optional)",
+        "description_devices": "Assign specific GPU devices or the CPU to this task. If specified and one or more devices are in use on other tasks, then this task will be queued until all devices are available. This field should typically be left blank and the system will automatically assign GPUs based on availability and task Priority.",
+        "error_devices_mixed_types": "You cannot mix device types",
+        "error_devices_mixed_hosts": "You cannot select devices from multiple hosts",
+        "engine": "Engine",
+        "description_engine": "The Cracking engine that should be used to process this task",
+        "placeholder_engine": "Select Cracking Engine",
+        "attack_mode": "Attack Mode",
+        "description_attack_mode": "Dictionary/Straight attacks use a wordlist dictionary and an optional set of mangling rules. They are preferred since they are more likely to crack passwords in a reasonable amount of time. Brute Force attacks use a set of character type strings and try every possible password with those character types. Brute Force attacks are impractical for long passwords and should generally be performed only after an exhaustive Dictionary/Straight attack.",
+        "attack_modes": {
+            "brute_force": "Brute Force",
+            "dict": "Dictionary/Straight"
+        },
+        "dictionary": "Dictionary File",
+        "description_dictionary": "Wordlist to use.",
+        "mangling_file": "Mangling Rule(s)",
+        "description_mangling_file": "Set of transformation rules that will be applied to each line in the dictionary. If no rules are selected, only the original line in the dictionary will be used.",
+        "file": "Password(s) File",
+        "description_file": "File containing hashes to be cracked. Exactly one Hash per line is required (no blank lines). Must be formatted exactly as shown for the selected Hash Type at the <a href=\"https://hashcat.net/wiki/doku.php?id=example_hashes\" target=\"_blank\">Example Hashes Guide</a>. File will be checked on upload and task cannot be created if the file contains any errors.",
+        "password_masks": "Password Mask(s)",
+        "description_password_masks": "List of character type strings to use for Brute Force attack.",
+        "hashtype": "Hash Type",
+        "description_hashtype": "Type of hashes to be cracked. The number listed is the mode identifier for Hashcat. Must be selected before a file is uploaded.",
+        "additional_users": "Additional Users",
+        "description_users": "Users that will receive emails when passwords crack and who will have access to this task via this web interface.",
+        "description_priority": "Relative priority of this task. Used to allocate GPUs and to prioritize tasks on the queue when necessary. If using a Higher priority, you may want to indicate why in the comment field."
+    },
+    "task_status": {
+        "cracked_passwords_header": "Cracked Passwords",
+        "task_status": "Task Status for ",
+        "start": "Start",
+        "stop": "Stop",
+        "edit": "Edit",
+        "download_results": "Download Results",
+        "realtime_status": "Realtime Status",
+        "task_info": "Task Info",
+        "header_action": "Action",
+        "header_status_code": "Status Code",
+        "header_user_id": "User ID",
+        "header_occurred_at": "Occurred At",
+        "tooltip_realtime_offline": "Realtime Status Offline/Starting",
+        "tooltip_edit_disabled": "Task must be stopped before editing",
+        "header_audit_log": "Audit Log",
+        "download_audit_log": "Export Audit Log",
+        "using_devices": "Using Devices",
+        "randomly_assigned": "Randomly Assigned"
+    },
+    "shared": {
+        "upload_file": "Upload File",
+        "download_file": "Download",
+        "loading": "Loading...",
+        "actions": "Actions",
+        "edit": "Edit",
+        "download": "Download",
+        "files": "Files",
+        "logout": "Logout",
+        "close": "Close",
+        "file_type": "File Type",
+        "casecode": "Case Code",
+        "name": "Name",
+        "created_by": "Created By",
+        "comment": "Comment",
+        "status": "Status",
+        "error": "Error",
+        "created_at": "Created At",
+        "language": "Language",
+        "task_name": "Task Name",
+        "delete": "Delete",
+        "engine": "Engine",
+        "search": "Search",
+        "search_tasks": "Search Tasks",
+        "edit_settings": "Edit Settings",
+        "priority": "Priority"
+    },
+    "upload_modal": {
+        "engine": "Engine",
+        "file": "File",
+        "title": "Upload File",
+        "select_hashcat_type": "Hash Type",
+        "is_shared": "Is Shared?",
+        "description_is_shared": "If selected, this allows other users who are not entitled to this file the ability to use it in their task. However, they will not be able to edit or download this file.",
+        "uploading": "Uploading...",
+        "all_selected": "Selecting 'All' performs no validation on the file you're about to upload and will show 0 hashes & 0 salts",
+        "error_select_a_file": "You must select a file before continuing"
+    },
+    "edit_user": {
+        "email": "E-Mail Address",
+        "is_admin": "Admin",
+        "description_is_admin": "Is the user an administrator? This grants the user access to everything",
+        "browser_notifications": "Browser Notifications",
+        "notification_revoke": "Revoke",
+        "notification_grant": "Grant",
+        "current_password": "Current Password",
+        "new_password": "New Password",
+        "confirm_password": "Confirm Password",
+        "email_invalid": "Please use a valid email address",
+        "current_password_missing": "Please set your current password",
+        "confirm_password_missing": "Please re-type your new password below",
+        "header_change_password": "Change Password",
+        "header_notifications": "Notifications"
+    },
+    "shared_headers": {
+        "file_id": "File ID",
+        "hashes_n_salts": "Hashes / Salts",
+        "filename": "File Name",
+        "uploaded_by": "Uploaded By",
+        "number_entries": "Item Count",
+        "file_type": "File Type",
+        "information": "Information",
+        "running_tasks": "Running Tasks"
+    },
+    "list_tasks": {
+        "header_tasks": "Tasks",
+        "header_task_id": "Task ID",
+        "header_cracked_total": "Cracked / Unq."
+    },
+    "list_files": {
+        "header_small_task": "uncracked password files",
+        "header_small_engine": "dictionaries, manging rules, brute force masks"
+    },
+    "delete_modal": {
+        "header_task": "Delete Task",
+        "header_file": "Delete File",
+        "warning_task": "Deleting this task will remove all cracked hashes along with the audit log. <b>Are you sure you want to do this?</b><br /><br /> You may take the following actions before deleting:",
+        "warning_file": "Deleting this file will cause tasks that rely on it to fail next time they attempt to run. Are you sure you want to do this?",
+        "success_file": "Successfully deleted file",
+        "success_task": "Successfully deleted task"
+    },
+    "edit_modal": {
+        "modify_task_status": "Change Status",
+        "modify_task_status_warn": "This allows you to override the tasks status. Only do this if you know what you're doing."
+    },
+    "hashcat": {
+        "attack_mode": "Attack Mode",
+        "hash_type": "Hash Type",
+        "mangling_rules": "Mangling Rule(s)",
+        "bruteforce_masks": "Bruteforce Mask(s)"
+    },
+    "dashboard": {
+        "connected_workers": "Active Workers",
+        "running_tasks": "Running Tasks",
+        "devices": "Free / Total Devices"
+    },
+    "graph": {
+        "password_lengths": "Length of Password",
+        "num_cracked_passwords": "Number of Cracked Passwords"
+    },
+    "file_info": {
+        "task_file": "Task File",
+        "dictionary_file": "Dictionary File"
+    }
+}
