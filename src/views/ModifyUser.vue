@@ -40,11 +40,9 @@
         <div class="form-group row" v-if="isAdministrator">
           <label for="isadmin" class="col-3 col-form-label">{{ $t('edit_user.is_admin') }}</label>
           <div class="col-9">
-            <label class="custom-control custom-checkbox">
-              <input type="checkbox" id="isadmin" v-model="isadmin" class="custom-control-input">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">{{ $t('edit_user.description_is_admin') }}</span>
-            </label>
+            <b-form-checkbox id="isadmin" v-model="isadmin">
+              {{ $t('edit_user.description_is_admin') }}
+            </b-form-checkbox>
           </div>
         </div>
 

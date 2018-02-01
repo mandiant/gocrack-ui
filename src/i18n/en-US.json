@@ -115,7 +115,8 @@
         "search": "Search",
         "search_tasks": "Search Tasks",
         "edit_settings": "Edit Settings",
-        "priority": "Priority"
+        "priority": "Priority",
+        "choose_file": "Choose a File to Upload..."
     },
     "upload_modal": {
         "engine": "Engine",
