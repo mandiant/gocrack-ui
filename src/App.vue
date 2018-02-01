@@ -15,6 +15,7 @@
 
           <b-nav-item-dropdown :text="$t('navbar.admin')" v-if="isAdministrator">
             <b-dropdown-item to="/users">{{ $t('navbar.users') }}</b-dropdown-item>
+            <b-dropdown-item to="/version">{{ $t('navbar.version') }}</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
 
