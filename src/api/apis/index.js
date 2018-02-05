@@ -5,6 +5,7 @@ import auditing from './auditing'
 import hashcat from './hashcat'
 import users from './users'
 import filemanager from './filemanager'
+import system from './system'
 
 var wrapConfig = function (fn, cfg) {
   return function () {
@@ -15,6 +16,8 @@ var wrapConfig = function (fn, cfg) {
 export default {
   wrapAPIWithConfig (config) {
     return {
+      // ./system
+      getVersionInfo: wrapConfig(system.getVersionInfo, config),
       // ./auth
       login: wrapConfig(auth.loginUser, config),
       // ./dashboard

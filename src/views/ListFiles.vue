@@ -18,52 +18,52 @@
       </div>
       <v-client-table :data="files" :columns="columns" v-else>
         <!-- Header Changes -->
-        <template slot="h__file_id" scope="props">
+        <template slot="h__file_id" slot-scope="props">
           <span>{{ $t('shared_headers.file_id') }}</span>
         </template>
-        <template slot="h__uploaded_by" scope="props">
+        <template slot="h__uploaded_by" slot-scope="props">
           <span>{{ $t('shared_headers.uploaded_by') }}</span>
         </template>
-        <template slot="h__use_in_engine" scope="props">
+        <template slot="h__use_in_engine" slot-scope="props">
           <span>{{ $t('shared.engine') }}</span>
         </template>
-        <template slot="h__hashes_salts" scope="props">
+        <template slot="h__hashes_salts" slot-scope="props">
           <span>{{ $t('shared_headers.hashes_n_salts') }}</span>
         </template>
-        <template slot="h__filename" scope="props">
+        <template slot="h__filename" slot-scope="props">
           <span>{{ $t('shared_headers.filename') }}</span>
         </template>
-        <template slot="h__actions" scope="props">
+        <template slot="h__actions" slot-scope="props">
           <span>{{ $t('shared.actions') }}</span>
         </template>
-        <template slot="h__uploaded_by" scope="props">
+        <template slot="h__uploaded_by" slot-scope="props">
           <span>{{ $t('shared_headers.uploaded_by') }}</span>
         </template>
-        <template slot="h__num_entries" scope="props">
+        <template slot="h__num_entries" slot-scope="props">
           <span>{{ $t('shared_headers.number_entries') }}</span>
         </template>
-        <template slot="h__file_type" scope="props">
+        <template slot="h__file_type" slot-scope="props">
           <span>{{ $t('shared.file_type') }}</span>
         </template>
 
         <!-- Data Changes -->
 
-        <template slot="file_type" scope="props">
+        <template slot="file_type" slot-scope="props">
           <span>{{ props.row.file_type }}</span>
         </template>
-        <template slot="created_at" scope="props">
+        <template slot="created_at" slot-scope="props">
           <span>{{ new Date(props.row.created_at).toString() }}</span>
         </template>
-        <template slot="uploaded_at" scope="props">
+        <template slot="uploaded_at" slot-scope="props">
           <span>{{ new Date(props.row.uploaded_at).toString() }}</span>
         </template>
-        <template slot="hashes_salts" scope="props">
+        <template slot="hashes_salts" slot-scope="props">
           <span>{{ props.row.num_passwords }} / {{ props.row.num_salts }}</span>
         </template>
-        <template slot="num_entries" scope="props">
+        <template slot="num_entries" slot-scope="props">
           <span>{{ props.row.num_entries | formatNumber }}</span>
         </template>
-        <template slot="actions" scope="props">
+        <template slot="actions" slot-scope="props">
           <b-dropdown id="actionDrop" size="sm" :text="$t('shared.actions')" variant="outline-primary" class="s-sm-1">
             <b-dropdown-item @click="showDeleteConfirmation(props.row.file_id)" >{{ $t('shared.delete') }}</b-dropdown-item>
             <DownloadButton :isTaskFile="isTaskFile" styleclass="dropdown-item" :islink="true" :fileid="props.row.file_id" />
@@ -79,7 +79,7 @@
                 ok-variant="danger"
                 :title="deleteModalHeader"
                 @ok="deleteFile">
-        <template slot="modal-ok" scope="props">
+        <template slot="modal-ok" slot-scope="props">
           <span>{{ $t('shared.delete') }}</span>
         </template>
         {{ $t('delete_modal.warning_file') }}

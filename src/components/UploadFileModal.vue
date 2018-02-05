@@ -14,9 +14,7 @@
     <div class="alert alert-danger" role="alert" v-if="error != null">
       <p>{{ error.msg }}</p>
       <ul>
-        <li v-for="err in error.errors">
-          {{ err }}
-        </li>
+        <li v-for="err in error.errors">{{ err }}</li>
       </ul>
     </div>
 
@@ -32,15 +30,22 @@
       <div class="form-group">
         <label for="fileUpload">{{ $t('upload_modal.file') }}</label>
         <br />
-        <b-form-file id="file_input1" v-model="file" ref="uploadFileInput"></b-form-file>
+
+        <b-form-file id="file_input1" v-model="file" ref="uploadFileInput" :placeholder="$t('shared.choose_file')"></b-form-file>
       </div>
       
       <!-- Display the options for a shared file if we're not a task file -->
       <template v-if="!isTaskFile">
         <b-form-group id="isFileShared" label-for="isFileShared"
                       :description="$t('upload_modal.description_is_shared')">
-          <b-form-checkbox id="isFileShared" v-model="selectedOptions.isFileShared" 
-                            value="true" unchecked-value="false">{{ $t('upload_modal.is_shared')}}</b-form-checkbox>
+          <b-form-checkbox 
+            id="isFileShared" 
+            v-model="selectedOptions.isFileShared" 
+            value="true"
+            unchecked-value="false"
+          >
+            {{ $t('upload_modal.is_shared')}}
+          </b-form-checkbox>
         </b-form-group>
 
         <b-form-group id="selectFileType" label-for="selectFileType" :label="$t('shared.file_type')">
@@ -161,14 +166,12 @@ export default {
       this.$refs.uploadFileInput.reset()
       this.file = null
       this.uploading = false
+      this.error = null
     },
 
     hideRequested (e) {
+      // Clicking OK on the modal tells it to exit, but if we're uploading we dont want it to close, so we cancel it.
       if (this.uploading) {
-        this.error = {
-          msg: this.$t('errors.upload_in_progress'),
-          errors: []
-        }
         return e.cancel()
       }
     },
@@ -197,8 +200,7 @@ export default {
 
     uploadFile (e) {
       if (this.uploading) {
-        e.cancel()
-        return
+        return e.cancel()
       }
 
       if (this.file === null) {
@@ -206,8 +208,7 @@ export default {
           msg: this.$t('upload_modal.error_select_a_file'),
           errors: []
         }
-        e.cancel()
-        return
+        return e.cancel()
       }
 
       let fileType = this.isTaskFile ? apitypes.FILE_TASK : apitypes.FILE_ENGINE

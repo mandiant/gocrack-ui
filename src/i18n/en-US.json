@@ -8,7 +8,8 @@
         "task_files": "Task Files",
         "admin": "Admin Settings",
         "users": "Users",
-        "edit_user": "Edit User"
+        "edit_user": "Edit User",
+        "version": "Version"
     },
     "login": {
         "header": "Log In",
@@ -115,7 +116,9 @@
         "search": "Search",
         "search_tasks": "Search Tasks",
         "edit_settings": "Edit Settings",
-        "priority": "Priority"
+        "priority": "Priority",
+        "choose_file": "Choose a File to Upload...",
+        "license": "License"
     },
     "upload_modal": {
         "engine": "Engine",
@@ -193,5 +196,11 @@
     "file_info": {
         "task_file": "Task File",
         "dictionary_file": "Dictionary File"
+    },
+    "version": {
+        "server_version": "Server Version",
+        "compiled_at": "Compiled At",
+        "worker_version_info": "Worker Version Info",
+        "loading": "Loading version information..."
     }
 }

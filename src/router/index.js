@@ -13,6 +13,7 @@ import ListFiles from '@/views/ListFiles'
 import UserListing from '@/views/UserListing'
 import ModifyUser from '@/views/ModifyUser'
 import RegisterUser from '@/views/RegisterUser'
+import VersionInfo from '@/views/VersionInfo'
 
 Vue.use(Router)
 
@@ -142,6 +143,14 @@ const routes = [
     meta: {
       title: 'Register',
       preventIfLoggedIn: true
+    }
+  },
+  {
+    path: '/version',
+    name: 'Version Information',
+    component: VersionInfo,
+    meta: {
+      title: 'Version Information'
     }
   }
 ]

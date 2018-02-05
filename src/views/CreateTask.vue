@@ -102,7 +102,7 @@
               :loading="loading_taskfiles"
               @input="$v.passwordfile.$touch()"
               @open="getAvailableTaskFiles">
-            <template slot="option" scope="props">
+            <template slot="option" slot-scope="props">
               <span>{{ props.option.filename }}</span>
               <ul>
                 <li>File ID: {{ props.option.file_id }}</li>
@@ -178,7 +178,7 @@
                 :loading="loading_enginefiles"
                 :class="{ 'invalid': $v.hashcat.dictionary.$invalid }"
                 @open="getEngineFiles">
-                <template slot="option" scope="props">
+                <template slot="option" slot-scope="props">
                   <span>{{ props.option.filename }}</span>
                   <ul>
                     <li>File ID: {{ props.option.file_id }}</li>
@@ -207,7 +207,7 @@
                 :options="manglingrules"
                 :loading="loading_enginefiles"
                 @open="getEngineFiles">
-                <template slot="option" scope="props">
+                <template slot="option" slot-scope="props">
                   <span>{{ props.option.filename }}</span>
                   <ul>
                     <li>File ID: {{ props.option.file_id }}</li>
@@ -240,7 +240,7 @@
                 :class="{ 'invalid': $v.hashcat.passwordmasks.$invalid }"
                 :loading="loading_enginefiles"
                 @open="getEngineFiles">
-                <template slot="option" scope="props">
+                <template slot="option" slot-scope="props">
                   <span>{{ props.option.filename }}</span>
                   <ul>
                     <li>File ID: {{ props.option.file_id }}</li>

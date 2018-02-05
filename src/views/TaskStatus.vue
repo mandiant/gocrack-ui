@@ -120,24 +120,24 @@
             </div>
           </div>
           <v-client-table :data="auditTable.data" :columns="auditTable.columns" :options="auditTable.options">
-            <template slot="h__occurred_at" scope="props">
+            <template slot="h__occurred_at" slot-scope="props">
               <span>{{ $t('task_status.header_occurred_at') }}</span>
             </template>
-            <template slot="occurred_at" scope="props">
+            <template slot="occurred_at" slot-scope="props">
               <div>
                 <span>{{ new Date(props.row.occurred_at).toString() }}</span>
               </div>
             </template>
 
-            <template slot="h__user_id" scope="props">
+            <template slot="h__user_id" slot-scope="props">
               <span>{{ $t('task_status.header_user_id') }}</span>
             </template>
 
-            <template slot="h__status_code" scope="props">
+            <template slot="h__status_code" slot-scope="props">
               <span>{{ $t('task_status.header_status_code') }}</span>
             </template>
 
-            <template slot="h__type" scope="props">
+            <template slot="h__type" slot-scope="props">
               <span>{{ $t('task_status.header_action') }}</span>
             </template>
           </v-client-table>
@@ -160,7 +160,7 @@
                ok-variant="danger"
                :title="deleteModalHeader"
                @ok="deleteTask">
-        <template slot="modal-ok" scope="props">
+        <template slot="modal-ok" slot-scope="props">
           <span>{{ $t('shared.delete') }}</span>
         </template>
         <p v-html="$t('delete_modal.warning_task')"></p>

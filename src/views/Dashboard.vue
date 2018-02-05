@@ -21,10 +21,10 @@
     <div>
       <h4>{{ $t('shared_headers.running_tasks') }}</h4>
       <b-table striped hover :items="runningTasks" :fields="runningFields" @row-clicked="clickedOnTask">
-        <template slot="using_devices" scope="data">
+        <template slot="using_devices" slot-scope="data">
           {{ data.item.using_devices | arrayToString }}
         </template>
-        <template slot="memory_usage" scope="data">
+        <template slot="memory_usage" slot-scope="data">
           {{ data.item.memory_usage | bytesToMb }}mb
         </template>
       </b-table>
