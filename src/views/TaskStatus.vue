@@ -224,7 +224,6 @@ export default {
         loaded: false,
         columns: ['occurred_at', 'user_id', 'status_code', 'type'],
         options: {
-          skin: 'table-bordered table-hover passwords',
           sortIcon: {base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc'}
         }
       }

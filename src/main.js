@@ -28,8 +28,8 @@ Vue.config.productionTip = false
 window.axios = axios
 
 Vue.use(Vuelidate)
-Vue.use(ClientTable)
-Vue.use(ServerTable, {}, false)
+Vue.use(ClientTable, {}, false, 'bootstrap4')
+Vue.use(ServerTable, {}, false, 'bootstrap4')
 Vue.use(BootstrapVue)
 
 // Sync vue's router with the state backend
