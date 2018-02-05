@@ -199,6 +199,7 @@
     },
     "version": {
         "server_version": "Server Version",
+        "ui_version": "UI Version",
         "compiled_at": "Compiled At",
         "worker_version_info": "Worker Version Info",
         "loading": "Loading version information..."

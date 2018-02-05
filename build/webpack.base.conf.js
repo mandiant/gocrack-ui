@@ -1,11 +1,15 @@
 var path = require('path')
+var webpack = require('webpack')
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+var GitRevisionPlugin = require('git-revision-webpack-plugin')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
+
+var gitRevisionPlugin = new GitRevisionPlugin()
 
 module.exports = {
   entry: {
@@ -25,6 +29,13 @@ module.exports = {
       '@': resolve('src')
     }
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'VERSION': JSON.stringify(gitRevisionPlugin.version()),
+      'COMMITHASH': JSON.stringify(gitRevisionPlugin.commithash()),
+      'BRANCH': JSON.stringify(gitRevisionPlugin.branch()),
+    })
+  ],
   module: {
     rules: [
       {
