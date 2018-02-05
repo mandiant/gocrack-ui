@@ -55,7 +55,6 @@ export default {
       hasLoaded: false,
       columns: ['hash', 'value', 'cracked_at'],
       options: {
-        skin: 'table-bordered table-hover passwords',
         sortIcon: {base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc'},
         orderBy: {
           column: 'cracked_at',
