@@ -9,7 +9,7 @@
     
         <h4>{{ $t('version.worker_version_info') }}</h4>
         <b-table striped hover :items="data.workers" :fields="workerFields">
-          <template slot="engines" scope="data">
+          <template slot="engines" slot-scope="data">
             {{ data.item.engines | versionArrayToString }}
           </template>
         </b-table>
@@ -21,7 +21,7 @@
     <p>Copyright 2017 {{ getCurrentYear }} FireEye. <a href="https://github.com/fireeye/gocrack/blob/master/LICENSE">{{ $t('shared.license') }}</a></p>
   </div>
 </template>
-  
+
 <script>
 export default {
   data () {
