@@ -3,7 +3,8 @@
     <h2>{{ $t('name') }}</h2>
     <div v-if="loaded">
       <ul>
-          <li>{{ $t('version.server_version') }}: <a :href="getGithubUrl">{{ data.version }}</a></li>
+          <li>{{ $t('version.server_version') }}: <a :href="getGithubUrl()">{{ data.version }}</a></li>
+          <li>{{ $t('version.ui_version') }}: <a :href="getGithubUrl(true)">{{ ui_version }}</a></li>
           <li>{{ $t('version.compiled_at') }}: {{ data.compiled_at }}</li>
         </ul>
     
@@ -28,7 +29,8 @@ export default {
     return {
       data: null,
       loaded: false,
-      workerFields: ['hostname', 'version', 'engines']
+      workerFields: ['hostname', 'version', 'engines'],
+      ui_version: VERSION // From git-revision-webpack-plugin
     }
   },
 
@@ -50,11 +52,14 @@ export default {
         return ''
       }
       return ` - ${date.getFullYear()}`
-    },
+    }
+  },
 
-    getGithubUrl () {
-      let rev = (this.data !== null ? this.data.version : 'master')
-      return `https://github.com/fireeye/gocrack/tree/${rev}`
+  methods: {
+    getGithubUrl (isUI = false) {
+      let ver = isUI ? this.ui_version : this.data.version
+      let rev = (this.data !== null ? ver : 'master')
+      return isUI ? `https://github.com/fireeye/gocrack-ui/tree/${rev}` : `https://github.com/fireeye/gocrack/tree/${rev}`
     }
   },
 

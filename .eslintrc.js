@@ -19,7 +19,10 @@ module.exports = {
   ],
   'globals': {
     '$': true,
-    'jQuery': true
+    'jQuery': true,
+    'VERSION': true,
+    'COMMITHASH': true,
+    'BRANCH': true
   },
   // add your custom rules here
   'rules': {
