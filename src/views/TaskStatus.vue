@@ -84,7 +84,7 @@
 
             <!-- File Information -->
             <div class="col">
-              <h5>File Information:</h5>
+              <h5>{{ $t('task_status.file_information') }}:</h5>
               <div v-if="canDisplayInfo">
                 <DisplayFileInfo :data="taskInfo.info" />
               </div>
@@ -98,11 +98,11 @@
         <!-- End task info container -->
         </div>
       </b-tab>
-      
+
       <b-tab :title="$t('task_status.realtime_status')">
         <StatusTable :data="getTaskEngineStatusById(this.taskid)" />
       </b-tab>
-  
+
       <b-tab :title="$t('task_status.cracked_passwords_header')" @click="emitPasswordLoad">
         <PasswordTable :taskid="taskid" :parent="this"></PasswordTable>
       </b-tab>

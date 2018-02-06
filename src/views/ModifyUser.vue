@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Modify User</h2>
+    <h2>{{ $t('navbar.edit_user') }}</h2>
     <hr />
 
     <!-- Comment out the line below to debug the validator -->
@@ -54,7 +54,7 @@
           <div class="form-group row" v-if="!isAdministrator">
             <label for="current_password" class="col-3 col-form-label">{{ $t('edit_user.current_password') }}</label>
             <div class="col-9">
-              <input 
+              <input
                 class="form-control"
                 type="password"
                 id="current_password"
@@ -66,7 +66,7 @@
           <div class="form-group row" :class="{ 'has-danger': $v.new_password.$invalid }">
             <label for="new_password" class="col-3 col-form-label">{{ $t('edit_user.new_password') }}</label>
             <div class="col-9">
-              <input 
+              <input
                 class="form-control"
                 type="password"
                 id="new_password"
@@ -81,7 +81,7 @@
           <div class="form-group row">
             <label for="confirm_password" class="col-3 col-form-label">{{ $t('edit_user.confirm_password') }}</label>
             <div class="col-9">
-              <input 
+              <input
                 class="form-control"
                 type="password"
                 id="confirm_password"
@@ -103,7 +103,7 @@
                 class="btn"
                 :class="{ 'btn-danger disabled': areNotificationsEnabled, 'btn-success': !areNotificationsEnabled}"
                 @click="changeBsNotificationState()"
-              >{{ browserNotificaitonState }}</a>
+              >{{ browserNotificationState }}</a>
             </div>
           </div>
         </template>
@@ -177,8 +177,8 @@ export default {
       return this.areNotificationsSupported && this.editingSelf
     },
 
-    browserNotificaitonState () {
-      return this.areNotificationsEnabled ? 'Revoke' : 'Grant'
+    browserNotificationState () {
+      return this.areNotificationsEnabled ? this.$t('edit_user.revoke') : this.$t('edit_user.grant')
     },
 
     userEditingOwnRecord () {
@@ -248,7 +248,7 @@ export default {
 
       if (Object.keys(payload).length === 0) {
         this.addToast({
-          text: 'No changes detected',
+          text: this.$t('edit_user.errors.no_changes'),
           type: 'danger'
         })
         return

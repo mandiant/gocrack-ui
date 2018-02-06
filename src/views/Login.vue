@@ -60,7 +60,7 @@ export default {
 
       if (credentials.username === '' || credentials.password === '') {
         this.addToast({
-          text: 'Username and/or Password cannot be empty',
+          text: this.$t('login.validation.empty_fields'),
           type: 'danger',
           dismissAfter: 4000
         })

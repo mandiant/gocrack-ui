@@ -23,11 +23,13 @@
             "email_required": "E-Mail is required",
             "email_valid": "E-Mail must be valid",
             "password_required": "Password is required",
-            "password_min_length": "Password must be at least 6 characters"
+            "password_min_length": "Password must be at least 6 characters",
+            "empty_fields": "Username and/or Password cannot be empty"
         },
         "username": "Username",
         "email": "E-Mail",
-        "password": "Password"
+        "password": "Password",
+        "created_user": "Created user! Logging you in..."
     },
     "errors": {
         "unauthorized": "Unauthorized",
@@ -89,7 +91,8 @@
         "header_audit_log": "Audit Log",
         "download_audit_log": "Export Audit Log",
         "using_devices": "Using Devices",
-        "randomly_assigned": "Randomly Assigned"
+        "randomly_assigned": "Randomly Assigned",
+        "file_information": "File Information"
     },
     "shared": {
         "upload_file": "Upload File",
@@ -145,7 +148,12 @@
         "current_password_missing": "Please set your current password",
         "confirm_password_missing": "Please re-type your new password below",
         "header_change_password": "Change Password",
-        "header_notifications": "Notifications"
+        "header_notifications": "Notifications",
+        "errors": {
+            "no_changes": "No changes detected"
+        },
+        "revoke": "Revoke",
+        "grant": "Grant"
     },
     "shared_headers": {
         "file_id": "File ID",
@@ -177,6 +185,11 @@
     "edit_modal": {
         "modify_task_status": "Change Status",
         "modify_task_status_warn": "This allows you to override the tasks status. Only do this if you know what you're doing."
+    },
+    "stop_modal": {
+        "confirmation": "Are you sure you want to stop this task?",
+        "confirmation_description": "If the task has not checkpointed, the task will be started from the beginning if resumed.",
+        "stop_ok": "The request to stop the job was successful. There may be a delay as the request is processed"
     },
     "hashcat": {
         "attack_mode": "Attack Mode",
