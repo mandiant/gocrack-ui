@@ -29,7 +29,10 @@
         "username": "Username",
         "email": "E-Mail",
         "password": "Password",
-        "created_user": "Created user! Logging you in..."
+        "created_user": "Created user! Logging you in...",
+        "errors": {
+            "unknown_error": "An unknown error occurred. This is probably due to a certificate error. Check Javascript Console for more information."
+        }
     },
     "errors": {
         "unauthorized": "Unauthorized",

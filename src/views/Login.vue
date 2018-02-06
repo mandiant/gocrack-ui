@@ -71,9 +71,18 @@ export default {
       this.$gocrack.login(credentials).then((token) =>
         this.$store.dispatch(storeMutations.LOGIN_SUCCESS, token)
       ).catch((error) => {
+        if (error == null) {
+          this.addToast({
+            text: this.$t('login.errors.unknown_error'),
+            type: 'danger',
+            dismissAfter: 4000
+          })
+        } else {
+          helpers.componentToastError(this, error)
+          this.credentials.password = ''
+        }
+
         this.loginFailed()
-        this.credentials.password = ''
-        helpers.componentToastError(this, error)
       })
     },
 
