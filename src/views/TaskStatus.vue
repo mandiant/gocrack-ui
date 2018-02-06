@@ -235,7 +235,7 @@ export default {
       this.$gocrack.modifyTaskStatus(this.taskid, newStatus).then((success) => {
         this.taskInfo.info.status = 'Queued'
         this.addToast({
-          text: 'Server accepted task status change',
+          text: this.$t('task_status.status_changed'),
           type: 'success'
         })
       }).catch((error) => {

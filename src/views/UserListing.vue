@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Users</h2>
+    <h2>{{ $t('navbar.users') }}</h2>
     <hr />
     <div class="alert alert-info" role="alert" v-if="loading">
       {{ $t('shared.loading') }}
