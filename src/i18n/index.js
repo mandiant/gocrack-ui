@@ -14,10 +14,20 @@ const languages = {
 }
 
 export function createI18n ({defaultLocale = languages.default}) {
-  return new VueI18n({
+  var i18n = new VueI18n({
     locale: defaultLocale,
     messages: languages.options
   })
+
+  if (module.hot) {
+    console.log('Allowing for hot reload of i18n translations')
+    module.hot.accept(['./en-US.json'], () => {
+      i18n.setLocaleMessage('en', require('./en-US.json'))
+      console.log('Reloading translations')
+    })
+  }
+
+  return i18n
 }
 
 export const langs = languages
