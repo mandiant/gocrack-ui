@@ -12,7 +12,7 @@
             id="inputUsername"
             type="username"
             class="form-control"
-            placeholder="Username" 
+            placeholder="Username"
             v-model="username"
             @input="delayTouch($v.username)">
             <div v-show="!$v.username.required && $v.username.$error" class="form-control-feedback">{{ $t('login.validation.user_required') }}</div>
@@ -108,7 +108,7 @@ export default {
         this.submittingRequest = false
         // Log them in!
         this.addToast({
-          text: 'Created user! Logging you in...',
+          text: this.$t('login.created_user'),
           type: 'success',
           dismissAfter: 4000
         })

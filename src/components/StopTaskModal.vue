@@ -1,13 +1,13 @@
 <template>
-  <b-modal 
+  <b-modal
     id="stop-task"
     title="Stop Task"
     ok-variant="warning"
     @ok="stopTask"
     :no-auto-focus="true">
-    <p>Are you sure you want to stop this task?</p>
+    <p>{{ $t('stop_modal.confirmation') }}</p>
     <br />
-    <span>If the task has not checkpointed, the task will be started from the beginning if resumed.</span>
+    <span>{{ $t('stop_modal.confirmation_description') }}</span>
   </b-modal>
 </template>
 
@@ -28,7 +28,7 @@ export default {
     stopTask (e) {
       this.$gocrack.modifyTaskStatus(this.taskid, 'stop').then((success) => {
         this.addToast({
-          text: 'Succesfully sent stop request',
+          text: this.$t('stop_modal.stop_ok'),
           type: 'success'
         })
       }).catch((error) => {

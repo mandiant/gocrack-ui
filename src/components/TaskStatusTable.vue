@@ -1,56 +1,54 @@
 <template>
   <div>
-    <div class="alert alert-info" role="alert" v-if="!data.running">
-      The task must be running in order for the live status to be displayed. If the task is running, please wait a few seconds for the browser to start recieving events.
-    </div>
+    <div class="alert alert-info" role="alert" v-if="!data.running">{{ $t('hashcat.no_status') }}</div>
     <table class="no-overflow table table-condensed" v-if="data.running">
       <tbody>
         <tr>
-          <td>Hash Target</td>
+          <td>{{ $t('hashcat.hash_target') }}</td>
           <td><span :title="status.HashTarget">{{ status.HashTarget }}</span></td>
         </tr>
         <tr>
-          <td>Hash Type</td>
+          <td>{{ $t('hashcat.hash_type') }}</td>
           <td>{{ status.HashType }}</td>
         </tr>
 
         <tr v-if="status.GuessMode == 9">
-          <td>Guess Mask</td>
+          <td>{{ $t('hashcat.guess_mask') }}</td>
           <td>{{ status.GuessMask }}</td>
         </tr>
 
         <tr v-if="status.GuessMode == 2">
-          <td>Guess Base</td>
+          <td>{{ $t('hashcat.guess_base') }}</td>
           <td>{{ status.GuessBase }}</td>
         </tr>
 
         <tr v-if="status.GuessMode == 2">
-          <td>Guess Mod</td>
+          <td>{{ $t('hashcat.guess_mod') }}</td>
           <td>{{ status.GuessMod }}</td>
         </tr>
 
         <tr>
-          <td>Status</td>
+          <td>{{ $t('hashcat.status') }}</td>
           <td>{{ status.Status }}</td>
         </tr>
         <tr>
-          <td>Time Started</td>
+          <td>{{ $t('hashcat.time_started') }}</td>
           <td>{{ status.TimeStarted }}</td>
         </tr>
         <tr>
-          <td>Time Estimated</td>
+          <td>{{ $t('hashcat.time_estimated') }}</td>
           <td>{{ status.TimeEstimated }} ({{ status.TimeEstimatedRelative }})</td>
         </tr>
         <tr>
-          <td>Total Speed</td>
+          <td>{{ $t('hashcat.total_speed') }}</td>
           <td>{{ status.TotalSpeed }}</td>
         </tr>
         <tr>
-          <td>Recovered</td>
+          <td>{{ $t('hashcat.recovered') }}</td>
           <td>{{ status.Recovered }}</td>
         </tr>
         <tr>
-          <td>Guess Queue</td>
+          <td>{{ $t('hashcat.guess_queue') }}</td>
           <td>{{ status.GuessQueue }}</td>
         </tr>
         <tr v-for="dev in status.DeviceStatus">
@@ -63,7 +61,7 @@
         </tr>
 
         <tr v-if="status.ProgressMode == 1">
-          <td>Progress</td>
+          <td>{{ $t('hashcat.progress') }}</td>
           <td>
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: getPercentageFromString(status.Progress) + '%'}">{{ getPercentageFromString(status.Progress) }}%</div>
@@ -72,7 +70,7 @@
         </tr>
 
         <tr v-if="status.ProgressMode == 1">
-          <td>Restore Point</td>
+          <td>{{ $t('hashcat.restore_point') }}</td>
           <td>
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: getPercentageFromString(status.RestorePoint) + '%'}">{{ getPercentageFromString(status.RestorePoint) }}%</div>
@@ -81,7 +79,7 @@
         </tr>
 
         <tr v-if="status.ProgressMode == 1">
-          <td>Rejected</td>
+          <td>{{ $t('hashcat.rejected') }}</td>
           <td>
             <div class="progress">
               <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="{width: getPercentageFromString(status.Rejected) + '%'}">{{ getPercentageFromString(status.Rejected) }}%</div>
