@@ -68,7 +68,7 @@
             label="name"
             :options="task_file_engines"
             :allow-empty="false" />
-          <div v-if="!showHashcatTypes" class="validation-failed">
+          <div v-if="!showHashcatTypes" class="form-control-feedback">
             <span>{{ $t('upload_modal.all_selected') }}</span>
           </div>
         </b-form-group>
@@ -169,10 +169,10 @@ export default {
       this.error = null
     },
 
-    hideRequested (e) {
+    hideRequested (event) {
       // Clicking OK on the modal tells it to exit, but if we're uploading we dont want it to close, so we cancel it.
       if (this.uploading) {
-        return e.cancel()
+        return event.preventDefault()
       }
     },
 
@@ -198,9 +198,9 @@ export default {
       this.uploadProgress = Math.round((event.loaded * 100) / event.total)
     },
 
-    uploadFile (e) {
+    uploadFile (event) {
       if (this.uploading) {
-        return e.cancel()
+        return event.preventDefault()
       }
 
       if (this.file === null) {
@@ -208,13 +208,13 @@ export default {
           msg: this.$t('upload_modal.error_select_a_file'),
           errors: []
         }
-        return e.cancel()
+        return event.preventDefault()
       }
 
       let fileType = this.isTaskFile ? apitypes.FILE_TASK : apitypes.FILE_ENGINE
       let uparams = {}
       // dont close this!
-      e.cancel()
+      event.preventDefault()
 
       if (this.isTaskFile) {
         uparams.engine = this.selectedOptions.selectedEngineForTask.id
@@ -235,6 +235,8 @@ export default {
           success.validated_hash = this.selectedOptions.hashcat_type
         }
         this.error = null
+        // XXX(cschmitt): TODO The API returns file_uuid but the UI is using file_id
+        success.file_id = success.file_uuid
         this.$emit('uploaded', success)
         this.addToast({
           text: `Successfully uploaded ${success.filename} as ${success.file_id}`,
@@ -254,7 +256,7 @@ export default {
           this.error = error.data
         }
         this.uploading = false
-        return e.cancel()
+        return event.preventDefault()()
       })
     },
 

@@ -1,6 +1,6 @@
 {
   "name": "gocrackui",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Web UI for GoCrack",
   "author": "Christopher Schmitt <chris.schmitt@mandiant.com>",
   "license": "MIT",

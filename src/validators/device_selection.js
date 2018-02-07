@@ -11,6 +11,7 @@ export function isDeviceTypeSelectionValid (selectedOptions) {
       isValid = false
     }
   })
+
   return isValid
 }
 
@@ -26,5 +27,6 @@ export function areDevicesOnSameHost (selectedOptions) {
       isValid = false
     }
   })
+
   return isValid
 }

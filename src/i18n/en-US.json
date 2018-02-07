@@ -74,7 +74,16 @@
         "description_hashtype": "Type of hashes to be cracked. The number listed is the mode identifier for Hashcat. Must be selected before a file is uploaded.",
         "additional_users": "Additional Users",
         "description_users": "Users that will receive emails when passwords crack and who will have access to this task via this web interface.",
-        "description_priority": "Relative priority of this task. Used to allocate GPUs and to prioritize tasks on the queue when necessary. If using a Higher priority, you may want to indicate why in the comment field."
+        "description_priority": "Relative priority of this task. Used to allocate GPUs and to prioritize tasks on the queue when necessary. If using a Higher priority, you may want to indicate why in the comment field.",
+        "taskTimeLimit": "Runtime Limit",
+        "taskTimeLimit_description": "The total runtime in seconds this job is allowed to run before it is automatically stopped",
+        "error_taskTimeLimit": "The time limit must be expressed as an integer (in seconds)",
+        "error_casecode": "The Case Code is required and must be at least 4 characters",
+        "error_taskname": "The Task Name is required and must be at least 10 characters",
+        "error_no_taskfile": "A file is required to crack",
+        "placeholder_taskfile": "Select password(s) to crack",
+        "invalid_form": "Please correct all validation errors before continuing",
+        "error_invalid_engine": "Invalid Engine"
     },
     "task_status": {
         "cracked_passwords_header": "Cracked Passwords",
@@ -125,7 +134,9 @@
         "edit_settings": "Edit Settings",
         "priority": "Priority",
         "choose_file": "Choose a File to Upload...",
-        "license": "License"
+        "license": "License",
+        "submit": "Submit",
+        "please_wait": "Please wait..."
     },
     "upload_modal": {
         "engine": "Engine",
@@ -187,8 +198,11 @@
         "success_task": "Successfully deleted task"
     },
     "edit_modal": {
+        "admin_header": "Admin Only",
         "modify_task_status": "Change Status",
-        "modify_task_status_warn": "This allows you to override the tasks status. Only do this if you know what you're doing."
+        "modify_task_status_warn": "This allows you to override the tasks status. Only do this if you know what you're doing.",
+        "modified_successfully": "Modified task {taskid}",
+        "modified_failed": "Task Modification Failed for {taskid}"
     },
     "stop_modal": {
         "confirmation": "Are you sure you want to stop this task?",
@@ -196,6 +210,7 @@
         "stop_ok": "The request to stop the job was successful. There may be a delay as the request is processed"
     },
     "hashcat": {
+        "settings_header": "Hashcat Settings",
         "attack_mode": "Attack Mode",
         "hash_type": "Hash Type",
         "mangling_rules": "Mangling Rule(s)",
@@ -234,5 +249,10 @@
         "compiled_at": "Compiled At",
         "worker_version_info": "Worker Version Info",
         "loading": "Loading version information..."
+    },
+    "selector_file": {
+        "file_id": "File ID: {id}",
+        "uploaded_by": "Uploaded By: {by}",
+        "num_entries": "# of Entries: {entries}"
     }
 }
