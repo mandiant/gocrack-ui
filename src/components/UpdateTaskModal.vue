@@ -8,6 +8,7 @@
            :ok-disabled="saveDisabled">
     <form @submit.stop.prevent="updateTask">
       <DeviceSelection v-model="devices" :v="$v.devices" />
+      <TimeLimitInput v-model="timelimit" />
 
       <template v-if="isAdministrator">
         <h4>{{ $t('edit_modal.admin_header') }}</h4>
@@ -73,7 +74,7 @@ export default {
 
   methods: {
     updateTask (e) {
-      if (this.devices !== null && this.devices.length >= 1 || this.taskstatus !== null) {
+      if (this.devices !== null && this.devices.length >= 1 || this.taskstatus !== null || this.timelimit !== null) {
         let reqpayload = {}
         let payloadDeviceInfo = this.devices.reduce((result, dev) => {
           // if the hostname hasn't been set yet, do it(tm)
@@ -92,6 +93,10 @@ export default {
 
         if (this.isAdministrator && this.taskstatus !== null) {
           reqpayload.task_status = this.taskstatus
+        }
+
+        if (this.timelimit !== null) {
+          reqpayload.task_duration = parseInt(this.timelimit)
         }
 
         this.$gocrack.modifyTask(this.taskid, reqpayload).then((data) => {
@@ -128,7 +133,8 @@ export default {
   data () {
     return {
       devices: [],
-      taskstatus: null
+      taskstatus: null,
+      timelimit: null
     }
   },
 
