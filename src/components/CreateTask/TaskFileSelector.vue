@@ -5,23 +5,23 @@
                 :label="$t('create_task.file')">
     <b-form-row>
       <b-col>
-          <multiselect v-model="internalValue"
-                       track-by="filename"
-                       label="filename"
-                       id="ajax"
-                       open-direction="bottom"
-                       :placeholder="$t('create_task.placeholder_taskfile')"
-                       :options="files"
-                       :loading="loading"
-                       :input="state"
-                       @open="getAvailableTaskFiles">
+        <multiselect v-model="internalValue"
+                     track-by="file_id"
+                     label="filename"
+                     id="ajax"
+                     open-direction="bottom"
+                     :placeholder="$t('create_task.placeholder_taskfile')"
+                     :options="files"
+                     :loading="loading"
+                     :input="state"
+                    @open="getAvailableTaskFiles">
           <!-- Dropdown Template -->
           <template slot="option" slot-scope="props">
-          <span>{{ props.option.filename }}</span>
-          <ul>
-            <li>{{ $t('selector_file.file_id', {id: props.option.file_id }) }}</li>
-            <li>{{ $t('selector_file.uploaded_by', {by: props.option.uploaded_by }) }}</li>
-          </ul>
+            <span>{{ props.option.filename }}</span>
+            <ul>
+              <li>{{ $t('selector_file.file_id', {id: props.option.file_id }) }}</li>
+              <li>{{ $t('selector_file.uploaded_by', {by: props.option.uploaded_by }) }}</li>
+            </ul>
           </template>
         </multiselect>
 
