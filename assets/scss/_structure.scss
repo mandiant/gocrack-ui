@@ -37,16 +37,7 @@ ul.no-style {
   word-wrap: break-word;
 }
 
-/*
-.page-header {
-  padding-bottom: 9px;
-  margin: 20px 0 20px;
-  border-bottom: 1px solid #eee;
-}
-*/
-
-.validation-failed {
-  margin-top: .25rem;
-  font-size: .875rem;
-  color: #dc3545;
+.form-feedback {
+  @extend .invalid-feedback;
+  display: block;
 }

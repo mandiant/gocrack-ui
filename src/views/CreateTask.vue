@@ -1,267 +1,158 @@
 <template>
   <div class="create-task">
-    <h2>Create Task</h2>
+    <h2>{{ $t('navbar.create_task') }}</h2>
     <hr />
-    <!-- Uncomment the below line to see validation details -->
     <!-- <pre>{{ $v }}</pre> -->
-    <form @submit.prevent="validateBeforeSubmit">
-      <!-- Case Code -->
-      <div class="form-group row" :class="{ 'has-danger': $v.casecode.$invalid }">
-        <label for="casecode" class="col-3 col-form-label">{{ $t('shared.casecode') }}</label>
-        <div class="col-9">
-          <input 
-            @input="$v.casecode.$touch()"
-            class="form-control"
-            type="text"
-            :class="{ 'form-control-danger': $v.casecode.$invalid }"
-            :placeholder="$t('create_task.placeholder_casecode')"
-            id="casecode"
-            v-model="casecode">
-          <small class="form-text text-muted">{{ $t('create_task.description_casecode') }}</small>
-          <div v-show="!$v.casecode.required && $v.casecode.$error" class="form-control-feedback">Case Code is required</div>
-        </div>
-      </div>
+    <b-form @submit="validateBeforeSubmit" class="needs-validation" id="form-create-task">
+        <!-- Case Code -->
+        <CaseCodeInput :v="$v.casecode" v-model="casecode" />
+  
+        <!-- Task/Session Name -->
+        <TaskNameInput :v="$v.taskname" v-model="taskname" />
+  
+        <!-- Priority -->
+        <b-form-group id="taskPriority"
+                      horizontal
+                      :description="$t('create_task.description_priority')"
+                      :label="$t('shared.priority')">
+          <b-form-select v-model="priority" :options="getTaskPriorities" />
+        </b-form-group>
+  
+        <!-- Comment -->
+        <b-form-group id="taskComment"
+                      horizontal
+                      :label="$t('shared.comment')">
+          <b-form-input id="taskComment"
+                        type="text"
+                        v-model="comment"
+                        novalidate
+                        :placeholder="$t('create_task.placeholder_comment')" />
+        </b-form-group>
+  
+        <!-- Additional Users -->
+        <UserSelection v-on:usr-grant-change="updateAdditionalUsers" />
+  
+        <!-- Use Devices -->
+        <DeviceSelection :v="$v.selectedDevices" v-model="selectedDevices" />
+  
+        <!-- Engine -->
+        <AvailableEngineSelector v-model="engine" />
+  
+        <!-- File -->
+        <TaskFileSelector :v="$v.passwordfile" v-model="passwordfile" />
 
-      <!-- Task/Session Name -->
-      <div class="form-group row" :class="{ 'has-danger': $v.taskname.$invalid }">
-        <label for="taskname" class="col-3 col-form-label">{{ $t('create_task.taskname') }}</label>
-        <div class="col-9">
-          <input
-            @input="$v.taskname.$touch()"
-            class="form-control"
-            type="text"
-            :class="{ 'form-control-danger': $v.taskname.$invalid }"
-            :placeholder="$t('create_task.placeholder_taskname')"
-            id="taskname"
-            name="taskname"
-            v-model="taskname">
-            <small class="form-text text-muted">{{ $t('create_task.description_taskname') }}</small>
-            <div v-show="!$v.taskname.required && $v.taskname.$error" class="form-control-feedback">Task Name is required</div>
-        </div>
-      </div>
-
-      <!-- Priority -->
-      <div class="form-group row">
-        <label for="priority" class="col-3 col-form-label">{{ $t('shared.priority') }}</label>
-        <div class="col-9">
-          <b-form-select
-            v-model="priority"
-            :options="getTaskPriorities"
-          />
-          <small class="form-text text-muted">{{ $t('create_task.description_priority') }}</small>
-        </div>
-      </div>
-
-      <!-- Comment -->
-      <div class="form-group row">
-        <label for="comment" class="col-3 col-form-label">{{ $t('shared.comment') }}</label>
-        <div class="col-9">
-          <input 
-            class="form-control"
-            type="text"
-            id="comment"
-            :placeholder="$t('create_task.placeholder_comment')"
-            v-model="comment">
-        </div>
-      </div>
-
-      <!-- Additional Users -->
-      <UserSelection v-on:usr-grant-change="updateAdditionalUsers" />
-
-      <!-- Use Devices -->
-      <DeviceSelection v-on:device-change="updateDevices" :v="$v.selectedDevices" />
-
-      <!-- Engine -->
-      <div class="form-group row">
-        <label class="col-3 col-form-label">{{ $t('shared.engine') }}</label>
-        <div class="col-9">
-          <multiselect
-            v-model="engine"
-            track-by="name"
-            label="name"
-            open-direction="bottom"
-            :placeholder="$t('create_task.placeholder_engine')"
-            :options="availableEngines"
-            :allow-empty="false" />
-          <small class="form-text text-muted">{{ $t('create_task.description_engine') }}</small>
-        </div>
-      </div>
-
-      <!-- File -->
-      <div class="form-group row" :class="{ 'has-danger': $v.passwordfile.$invalid }">
-        <label class="col-3 col-form-label">{{ $t('create_task.file') }}</label>
-        <div class="col-7">
-          <multiselect
-              v-model="passwordfile"
-              track-by="filename"
-              label="filename"
-              id="ajax"
-              open-direction="bottom"
-              placeholder="Select password(s) to crack"
-              :options="taskfiles"
-              :loading="loading_taskfiles"
-              @input="$v.passwordfile.$touch()"
-              @open="getAvailableTaskFiles">
-            <template slot="option" slot-scope="props">
-              <span>{{ props.option.filename }}</span>
-              <ul>
-                <li>File ID: {{ props.option.file_id }}</li>
-                <li>Uploaded By: {{ props.option.uploaded_by }}</li>
-              </ul>
-            </template>
-
-          </multiselect>
-          <small class="form-text text-muted"><p v-html="$t('create_task.description_file')"></p></small>
-          <div v-show="!$v.passwordfile.required && $v.passwordfile.$error" class="form-control-feedback">A file is required to crack</div>
-          <!-- Show information about this file -->
-          <template v-if="passwordfile !== null">
-            <small class="form-text text-muted">This file was uploaded on {{ new Date(passwordfile.uploaded_at).toString() }} and it's size is {{ passwordfile.file_size }} bytes</small>
+        <TimeLimitInput :v="$v.timelimit" v-model="taskTimeLimit" />
+  
+        <!-- Hashcat Specific Settings -->
+        <template v-if="showHashcatOptions">
+          <h3>{{ $t('hashcat.settings_header') }}</h3>
+          <hr />
+  
+          <!-- Hash Type -->
+          <HashcatHashTypesSelector v-model="hashcat.hashtype" />
+  
+          <!-- Attack Mode -->
+          <HashcatAttackModeSelector v-model="hashcat.attack_mode" :changed="attackModeChanged" />
+          
+          <!-- XXX(cschmitt): Refactor these inputs.. they share the same data, although filtered -->
+          <!-- Dictionary Only Options -->
+          <template v-if="hashcat.attack_mode.id == 0">
+            <div class="form-group row">
+              <label for="maskFile" class="col-3 col-form-label">{{ $t('create_task.dictionary') }}</label>
+              <div class="col-9">
+                <multiselect
+                  v-model="hashcat.dictionary"
+                  track-by="filename"
+                  label="filename"
+                  id="ajax"
+                  open-direction="bottom"
+                  :allow-empty="false"
+                  :options="dictionaries"
+                  :loading="loading_enginefiles"
+                  @open="getEngineFiles">
+                  <template slot="option" slot-scope="props">
+                    <span>{{ props.option.filename }}</span>
+                    <ul>
+                      <li>{{ $t('selector_file.file_id', {id: props.option.file_id }) }}</li>
+                      <li>{{ $t('selector_file.uploaded_by', {by: props.option.uploaded_by }) }}</li>
+                      <li>{{ $t('selector_file.num_entries', {entries: props.option.num_entries }) }}</li>
+                    </ul>
+                  </template>
+                </multiselect>
+                <small class="form-text text-muted"><p v-html="$t('create_task.description_dictionary')"></p></small>
+                <!-- Show information about this file -->
+                <template v-if="hashcat.dictionary !== null">
+                  <small class="form-text text-muted">This file contains {{ hashcat.dictionary.num_entries | formatNumber }} entries.</small>
+                </template>
+              </div>
+            </div>
+  
+            <div class="form-group row">
+              <label for="maskFile" class="col-3 col-form-label">{{ $t('create_task.mangling_file') }}</label>
+              <div class="col-9">
+                <multiselect
+                  v-model="hashcat.manglingrules"
+                  track-by="filename"
+                  label="filename"
+                  id="ajax"
+                  open-direction="bottom"
+                  :options="manglingrules"
+                  :loading="loading_enginefiles"
+                  @open="getEngineFiles">
+                  <template slot="option" slot-scope="props">
+                    <span>{{ props.option.filename }}</span>
+                    <ul>
+                      <li>{{ $t('selector_file.file_id', {id: props.option.file_id }) }}</li>
+                      <li>{{ $t('selector_file.uploaded_by', {by: props.option.uploaded_by }) }}</li>
+                      <li>{{ $t('selector_file.num_entries', {entries: props.option.num_entries }) }}</li>
+                    </ul>
+                  </template>
+                </multiselect>
+                <small class="form-text text-muted"><p v-html="$t('create_task.description_mangling_file')"></p></small>
+                <!-- Show information about this file -->
+                <template v-if="hashcat.manglingrules !== null">
+                  <small class="form-text text-muted">This file contains {{ hashcat.manglingrules.num_entries | formatNumber }} entries.</small>
+                </template>
+              </div>
+            </div>
           </template>
-        </div>
-        <div class="col-2">
-          <b-btn v-b-modal.upload-file variant="primary">{{ $t('shared.upload_file') }}</b-btn>
-        </div>
-      </div>
-
-      <!-- Hashcat Specific Settings -->
-      <template v-if="showHashcatOptions">
-        <h3>Hashcat Settings</h3>
-        <hr />
-
-        <!-- Hash Type -->
-        <div class="form-group row" :class="{ 'has-danger': $v.hashcat.hashtype.$invalid }">
-          <label for="hashtype" class="col-3 col-form-label">{{ $t('create_task.hashtype') }}</label>
-          <div class="col-9">
-            <multiselect
-              v-model="hashcat.hashtype"
-              track-by="name"
-              label="name"
-              open-direction="bottom"
-              :allow-empty="false"
-              :loading="hashcat.loading_available_hashtypes"
-              :options="hashcat.available_hashtypes"
-              :class="{ 'invalid': $v.hashcat.hashtype.$invalid }"
-              @open="getHashcatHashTypes" />
-            <small class="form-text text-muted">{{ $t('create_task.description_hashtype') }}</small>
-          </div>
-        </div>
-
-        <!-- Attack Mode -->
-        <div class="form-group row">
-          <label for="attackMode" class="col-3 col-form-label">{{ $t('create_task.attack_mode') }}</label>
-          <div class="col-9">
-            <multiselect
-              v-model="hashcat.attack_mode"
-              track-by="name"
-              label="name"
-              open-direction="bottom"
-              :allow-empty="false"
-              :options="hashcat.available_attack_modes"
-              @select="attackModeChanged" />
-            <small class="form-text text-muted">{{ $t('create_task.description_attack_mode') }}</small>
-          </div>
-        </div>
-
-        <!-- Dictionary Only Options -->
-        <template v-if="hashcat.attack_mode.id == 0">
-          <div class="form-group row" :class="{ 'has-danger': $v.hashcat.dictionary.$invalid }">
-            <label for="maskFile" class="col-3 col-form-label">{{ $t('create_task.dictionary') }}</label>
-            <div class="col-9">
-              <multiselect
-                v-model="hashcat.dictionary"
-                track-by="filename"
-                label="filename"
-                id="ajax"
-                open-direction="bottom"
-                :allow-empty="false"
-                :options="dictionaries"
-                :loading="loading_enginefiles"
-                :class="{ 'invalid': $v.hashcat.dictionary.$invalid }"
-                @open="getEngineFiles">
-                <template slot="option" slot-scope="props">
-                  <span>{{ props.option.filename }}</span>
-                  <ul>
-                    <li>File ID: {{ props.option.file_id }}</li>
-                    <li>Uploaded By: {{ props.option.uploaded_by }}</li>
-                    <li># of Entries: {{ props.option.num_entries | formatNumber }}</li>
-                  </ul>
+  
+          <!-- Brute Force Only Options -->
+          <template v-if="hashcat.attack_mode.id == 3">
+            <div class="form-group row">
+              <label for="maskFile" class="col-3 col-form-label">{{ $t('create_task.password_masks') }}</label>
+              <div class="col-9">
+                <multiselect
+                  v-model="hashcat.passwordmasks"
+                  track-by="filename"
+                  label="filename"
+                  id="ajax"
+                  open-direction="bottom"
+                  :options="passwordmasks"
+                  :loading="loading_enginefiles"
+                  @open="getEngineFiles">
+                  <template slot="option" slot-scope="props">
+                    <span>{{ props.option.filename }}</span>
+                    <ul>
+                      <li>{{ $t('selector_file.file_id', {id: props.option.file_id }) }}</li>
+                      <li>{{ $t('selector_file.uploaded_by', {by: props.option.uploaded_by }) }}</li>
+                      <li>{{ $t('selector_file.num_entries', {entries: props.option.num_entries }) }}</li>
+                    </ul>
+                  </template>
+                </multiselect>
+                <small class="form-text text-muted"><p v-html="$t('create_task.description_password_masks')"></p></small>
+                <!-- Show information about this file -->
+                <template v-if="hashcat.passwordmasks !== null">
+                  <small class="form-text text-muted">This file contains {{ hashcat.passwordmasks.num_entries | formatNumber }} entries.</small>
                 </template>
-              </multiselect>
-              <small class="form-text text-muted"><p v-html="$t('create_task.description_dictionary')"></p></small>
-              <!-- Show information about this file -->
-              <template v-if="hashcat.dictionary !== null">
-                <small class="form-text text-muted">This file contains {{ hashcat.dictionary.num_entries | formatNumber }} entries.</small>
-              </template>
+              </div>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="maskFile" class="col-3 col-form-label">{{ $t('create_task.mangling_file') }}</label>
-            <div class="col-9">
-              <multiselect
-                v-model="hashcat.manglingrules"
-                track-by="filename"
-                label="filename"
-                id="ajax"
-                open-direction="bottom"
-                :options="manglingrules"
-                :loading="loading_enginefiles"
-                @open="getEngineFiles">
-                <template slot="option" slot-scope="props">
-                  <span>{{ props.option.filename }}</span>
-                  <ul>
-                    <li>File ID: {{ props.option.file_id }}</li>
-                    <li>Uploaded By: {{ props.option.uploaded_by }}</li>
-                    <li># of Entries: {{ props.option.num_entries | formatNumber }}</li>
-                  </ul>
-                </template>
-              </multiselect>
-              <small class="form-text text-muted"><p v-html="$t('create_task.description_mangling_file')"></p></small>
-              <!-- Show information about this file -->
-              <template v-if="hashcat.manglingrules !== null">
-                <small class="form-text text-muted">This file contains {{ hashcat.manglingrules.num_entries | formatNumber }} entries.</small>
-              </template>
-            </div>
-          </div>
+          </template>
+        <!-- End Hashcat Specific Settings -->
         </template>
 
-        <!-- Brute Force Only Options -->
-        <template v-if="hashcat.attack_mode.id == 3">
-          <div class="form-group row" :class="{ 'has-danger': $v.hashcat.passwordmasks.$invalid }">
-            <label for="maskFile" class="col-3 col-form-label">{{ $t('create_task.password_masks') }}</label>
-            <div class="col-9">
-              <multiselect
-                v-model="hashcat.passwordmasks"
-                track-by="filename"
-                label="filename"
-                id="ajax"
-                open-direction="bottom"
-                :options="passwordmasks"
-                :class="{ 'invalid': $v.hashcat.passwordmasks.$invalid }"
-                :loading="loading_enginefiles"
-                @open="getEngineFiles">
-                <template slot="option" slot-scope="props">
-                  <span>{{ props.option.filename }}</span>
-                  <ul>
-                    <li>File ID: {{ props.option.file_id }}</li>
-                    <li>Uploaded By: {{ props.option.uploaded_by }}</li>
-                    <li># of Entries: {{ props.option.num_entries | formatNumber }}</li>
-                  </ul>
-                </template>
-              </multiselect>
-              <small class="form-text text-muted"><p v-html="$t('create_task.description_password_masks')"></p></small>
-              <!-- Show information about this file -->
-              <template v-if="hashcat.passwordmasks !== null">
-                <small class="form-text text-muted">This file contains {{ hashcat.passwordmasks.num_entries | formatNumber }} entries.</small>
-              </template>
-            </div>
-          </div>
-        </template>
-      <!-- End Hashcat Specific Settings -->
-      </template>
-      <button class="btn btn-primary btn-block" type="submit" :disabled="$v.$invalid || this.submitting_task">Submit</button>
-    </form>
-
+        <button class="btn btn-primary btn-block" type="submit">{{ $t('shared.submit') }}</button>
+      </b-form>
     <UploadFileModal :isTaskFile="true" v-on:uploaded="fileUploaded" />
   </div>
 </template>
@@ -273,7 +164,7 @@ input[type='file'] {
 </style>
 
 <script>
-import { required } from 'vuelidate/lib/validators'
+import { required, numeric, minLength } from 'vuelidate/lib/validators'
 import { isDeviceTypeSelectionValid, areDevicesOnSameHost } from '@/validators/device_selection'
 
 import Multiselect from 'vue-multiselect'
@@ -314,7 +205,6 @@ export default {
   },
 
   methods: {
-
     // fileUploaded is called whenever a file is uploaded from the modal
     fileUploaded (event) {
       this.passwordfile = {
@@ -334,10 +224,14 @@ export default {
       }
     },
 
-    validateBeforeSubmit (e) {
+    validateBeforeSubmit (event) {
+      event.preventDefault()
+      event.stopPropagation()
+
       if (this.$v.$invalid) {
+        $('html, body').animate({ scrollTop: 0 }, 'fast')
         this.addToast({
-          text: 'Please correct all validation errors before continuing',
+          text: this.$t('create_task.invalid_form'),
           type: 'danger'
         })
         return
@@ -346,15 +240,10 @@ export default {
       }
     },
 
-    updateDevices (devices) {
-      this.selectedDevices = devices
-      this.$v.selectedDevices.$touch()
-    },
-
     _submitform () {
       if (this.submitting_task) {
         this.addToast({
-          text: 'Please wait...',
+          text: this.$t('shared.please_wait'),
           type: 'warning'
         })
         return
@@ -368,6 +257,10 @@ export default {
         file_id: this.passwordfile.file_id,
         case_code: this.casecode,
         priority: this.priority
+      }
+
+      if (this.taskTimeLimit !== null) {
+        payload.task_duration = parseInt(this.taskTimeLimit)
       }
 
       if (this.comment !== null && this.comment !== '') {
@@ -414,7 +307,7 @@ export default {
           break
         default:
           this.addToast({
-            text: 'Invalid Engine',
+            text: this.$t('create_task.error_invalid_engine'),
             type: 'danger'
           })
           return
@@ -432,8 +325,8 @@ export default {
 
     // attackModeChanged will clear some of the formdata fields that we no longer need when we send the data
     // off to the server
-    attackModeChanged (selectedValue, id) {
-      switch (selectedValue.id) {
+    attackModeChanged (newAttackMode) {
+      switch (newAttackMode) {
         case 0:
           this.hashcat.passwordmasks = null
           break
@@ -442,22 +335,6 @@ export default {
           this.hashcat.manglingrules = null
           break
       }
-    },
-
-    getAvailableTaskFiles (search) {
-      if (this.taskfiles.length > 0) {
-        return
-      }
-
-      this.loading_taskfiles = true
-      this.$gocrack.getTaskFiles().then((data) => {
-        this.taskfiles = data
-        this.loading_taskfiles = false
-      }).catch((error) => {
-        this.loading_taskfiles = false
-        let vm = this
-        helpers.componentToastError(vm, error)
-      })
     },
 
     _filter_engine_files (data, filter) {
@@ -484,22 +361,6 @@ export default {
       })
     },
 
-    getHashcatHashTypes (search) {
-      if (this.hashcat.available_hashtypes.length > 0) {
-        return
-      }
-
-      this.hashcat.loading_available_hashtypes = true
-      this.$gocrack.getHashcatTypes().then((data) => {
-        this.hashcat.loading_available_hashtypes = false
-        this.hashcat.available_hashtypes = data
-      }).catch((error) => {
-        this.hashcat.loading_available_hashtypes = false
-        let vm = this
-        helpers.componentToastError(vm, error)
-      })
-    },
-
     updateAdditionalUsers (data) {
       this.additionalUsers = data
     },
@@ -512,10 +373,6 @@ export default {
   data () {
     return {
       hashcat: {
-        loading_available_hashtypes: false,
-        available_hashtypes: [],
-
-        available_attack_modes: apitypes.HASHCAT_ATTACK_MODES,
         attack_mode: apitypes.HASHCAT_ATTACK_MODES[0],
         // Selected file
         dictionary: null,
@@ -523,12 +380,9 @@ export default {
         passwordmasks: null,
         hashtype: null
       },
-      loading_taskfiles: false,
       loading_enginefiles: false,
       submitting_task: false,
-      availableEngines: apitypes.GOCRACK_ENGINES,
       // List of all the files
-      taskfiles: [],
       passwordmasks: [],
       dictionaries: [],
       manglingrules: [],
@@ -541,17 +395,20 @@ export default {
       passwordfile: null,
       selectedDevices: [],
       additionalUsers: [],
-      priority: 1
+      priority: 1,
+      taskTimeLimit: null
     }
   },
 
   validations () {
     let validations = {
-      taskname: {
-        required
-      },
       casecode: {
-        required
+        required,
+        minLength: minLength(4)
+      },
+      taskname: {
+        required,
+        minLength: minLength(10)
       },
       passwordfile: {
         required
@@ -559,6 +416,9 @@ export default {
       selectedDevices: {
         isDeviceTypeSelectionValid,
         areDevicesOnSameHost
+      },
+      timelimit: {
+        numeric
       }
     }
 

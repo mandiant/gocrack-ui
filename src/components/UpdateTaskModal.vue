@@ -1,19 +1,23 @@
 <template>
-  <b-modal id="edit-task" title="Edit Task" @hidden="clearEditProps" @ok="updateTask" size="lg" :no-auto-focus="true">
+  <b-modal id="edit-task" 
+           title="Edit Task"
+           @hidden="clearEditProps"
+           @ok="updateTask"
+           size="lg"
+           :no-auto-focus="true"
+           :ok-disabled="saveDisabled">
     <form @submit.stop.prevent="updateTask">
-      <DeviceSelection v-on:device-change="updateDevices" :v="$v.devices" />
+      <DeviceSelection v-model="devices" :v="$v.devices" />
 
       <template v-if="isAdministrator">
-        <h4>Admin Only</h4>
+        <h4>{{ $t('edit_modal.admin_header') }}</h4>
         <hr />
         <div class="form-group row">
           <label for="taskstatus" class="col-3 col-form-label">{{ $t('edit_modal.modify_task_status') }}</label>
           <div class="col-9">
-            <multiselect
-              v-model="taskstatus"
-              :options="taskStatusOptions"
-              :searchable="false"
-            />
+            <multiselect v-model="taskstatus"
+                         :options="taskStatusOptions"
+                         :searchable="false" />
             <small class="form-text text-muted">{{ $t('edit_modal.modify_task_status_warn') }}</small>
           </div>
         </div>
@@ -58,6 +62,10 @@ export default {
       return atypes.TASK_STATUSES
     },
 
+    saveDisabled () {
+      return this.$v.$dirty && this.$v.$invalid
+    },
+
     ...mapGetters([
       'isAdministrator'
     ])
@@ -89,12 +97,12 @@ export default {
         this.$gocrack.modifyTask(this.taskid, reqpayload).then((data) => {
           if (data === true) {
             this.addToast({
-              text: `Modified task ${this.taskid}`,
+              text: this.$t('edit_modal.modified_successfully', {taskid: this.taskid}),
               type: 'success'
             })
           } else {
             this.addToast({
-              text: `Failed to modify task ${this.taskid}`,
+              text: this.$t('edit_modal.modified_failed', {taskid: this.taskid}),
               type: 'danger'
             })
             return e.cancel()
@@ -107,15 +115,8 @@ export default {
       }
     },
 
-    updateDevices (devices) {
-      this.devices = devices
-      this._devices_dirty = true
-      this.$v.devices.$touch()
-    },
-
     clearEditProps () {
       this.devices = []
-      this._devices_dirty = false
       this.taskstatus = null
     },
 
@@ -127,7 +128,6 @@ export default {
   data () {
     return {
       devices: [],
-      _devices_dirty: false,
       taskstatus: null
     }
   },

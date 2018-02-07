@@ -68,7 +68,7 @@
             label="name"
             :options="task_file_engines"
             :allow-empty="false" />
-          <div v-if="!showHashcatTypes" class="validation-failed">
+          <div v-if="!showHashcatTypes" class="form-control-feedback">
             <span>{{ $t('upload_modal.all_selected') }}</span>
           </div>
         </b-form-group>

@@ -16,13 +16,22 @@ import 'jquery/dist/jquery.slim.min.js'
 import 'popper.js/dist/umd/popper.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 // Font Awesome Config
 import 'font-awesome/scss/font-awesome.scss'
 import '../config/font-awesome.config.js'
+
+// Custom Components
+import * as CreateTaskComponents from './components/CreateTask'
+for (let component in CreateTaskComponents) {
+  Vue.component(component, CreateTaskComponents[component])
+}
+
+import * as HashcatComponents from './components/Hashcat'
+for (let component in HashcatComponents) {
+  Vue.component(component, HashcatComponents[component])
+}
 
 Vue.config.productionTip = false
 window.axios = axios
