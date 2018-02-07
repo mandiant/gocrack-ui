@@ -39,7 +39,7 @@
         <AvailableEngineSelector v-model="engine" />
   
         <!-- File -->
-        <TaskFileSelector :v="$v.passwordfile" v-model="passwordfile" />
+        <TaskFileSelector :v="$v.passwordfile" v-model="passwordfile" ref="fileSelector" />
 
         <TimeLimitInput :v="$v.timelimit" v-model="taskTimeLimit" />
   
@@ -153,7 +153,7 @@
 
         <button class="btn btn-primary btn-block" type="submit">{{ $t('shared.submit') }}</button>
       </b-form>
-    <UploadFileModal :isTaskFile="true" v-on:uploaded="fileUploaded" />
+    <UploadFileModal :isTaskFile="true" ref="fileUploadModal" />
   </div>
 </template>
 
@@ -204,11 +204,21 @@ export default {
     }
   },
 
+  mounted () {
+    this.$refs.fileSelector.$on('input', this.fileSelected)
+    this.$refs.fileUploadModal.$on('uploaded', this.fileSelected)
+  },
+
+  beforeDestroy () {
+    this.$refs.fileSelector.$off('input', this.fileSelected)
+    this.$refs.fileUploadModal.$off('uploaded', this.fileSelected)
+  },
+
   methods: {
-    // fileUploaded is called whenever a file is uploaded from the modal
-    fileUploaded (event) {
+    // fileSelected is called whenever a file is uploaded from the modal
+    fileSelected (event) {
       this.passwordfile = {
-        file_id: event.file_uuid,
+        file_id: event.file_id,
         filename: event.filename,
         file_size: event.file_size,
         uploaded_at: event.uploaded_at
@@ -219,6 +229,7 @@ export default {
         switch (this.engine.id) {
           case apitypes.ENGINE_HASHCAT:
             this.hashcat.hashtype = event.validated_hash
+            this.$emit('hashcat::known_type', event.validated_hash)
             break
         }
       }

@@ -32,7 +32,7 @@ export default {
   },
 
   model: {
-    prop: 'internalValue'
+    prop: 'value'
   },
 
   watch: {
@@ -41,7 +41,19 @@ export default {
     }
   },
 
+  mounted () {
+    this.$parent.$on('hashcat::known_type', this.changeState)
+  },
+
+  beforeDestroy () {
+    this.$parent.$off('hashcat::known_type', this.changeState)
+  },
+
   methods: {
+    changeState (event) {
+      this.internalValue = event
+    },
+
     getHashcatHashTypes (search) {
       if (this.options.length > 0) {
         return

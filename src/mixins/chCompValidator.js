@@ -6,6 +6,10 @@ export default {
     }
   },
 
+  model: {
+    prop: 'value'
+  },
+
   data () {
     return { internalValue: this.value }
   },
