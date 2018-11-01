@@ -38,8 +38,7 @@
       <template v-if="!isTaskFile">
         <b-form-group id="isFileShared" label-for="isFileShared"
                       :description="$t('upload_modal.description_is_shared')">
-          <b-form-checkbox 
-            id="isFileShared" 
+          <b-form-checkbox
             v-model="selectedOptions.isFileShared" 
             value="true"
             unchecked-value="false"
