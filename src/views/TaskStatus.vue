@@ -77,6 +77,11 @@
                       <td>{{ $t('hashcat.hash_type') }}</td>
                       <td>{{ taskInfo.info.engine_options.hash_type }}</td>
                     </tr>
+                    <tr>
+                      <td>Runtime Limit</td>
+                      <td>{{ taskInfo.info.task_duration}}</td>
+                    </tr>
+
                   </template>
                 </tbody>
               </table>

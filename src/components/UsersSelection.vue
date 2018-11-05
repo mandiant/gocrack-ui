@@ -1,8 +1,9 @@
 <template>
   <div class="form-group row">
-    <label for="additionalUsers" class="col-3 col-form-label">{{ $t('create_task.additional_users') }}</label>
+    <label for="updateAdditionalUsers" class="col-3 col-form-label">{{ $t('create_task.additional_users') }}</label>
     <div class="col-9">
       <multiselect
+        v-model="additionalusers"
         :multiple="true"
         :loading="loading"
         :options="users"
@@ -31,7 +32,8 @@ export default {
   data () {
     return {
       loading: false,
-      users: []
+      users: [],
+      additionalusers: []
     }
   },
 
