@@ -3,7 +3,7 @@
     <b-tab :title="$t('file_info.task_file')" active>
       <table class="table">
         <tbody>
-          <tr v-for="(value, key) in data.password_file">
+          <tr v-bind:key="key" v-for="(value, key) in data.password_file">
             <td>{{ key | rename }}</td>
             <td>{{ value }}</td>
           </tr>
@@ -16,7 +16,7 @@
       <b-tab :title="$t('file_info.dictionary_file')" v-if="data.engine_options.dictionary_file !== undefined">
         <table class="table">
           <tbody>
-            <tr v-for="(value, key) in data.engine_options.dictionary_file">
+            <tr v-bind:key="key" v-for="(value, key) in data.engine_options.dictionary_file">
               <td>{{ key | rename }}</td>
               <td>{{ value }}</td>
             </tr>
@@ -24,11 +24,11 @@
         </table>
         <DownloadButton :fileid="data.engine_options.dictionary_file.file_id" :isTaskFile="false" styleclass="btn-small" />
       </b-tab>
-  
+
       <b-tab :title="$t('hashcat.mangling_rules')" v-if="data.engine_options.mangling_file !== undefined">
         <table class="table">
           <tbody>
-            <tr v-for="(value, key) in data.engine_options.mangling_file">
+            <tr v-bind:key="key" v-for="(value, key) in data.engine_options.mangling_file">
               <td>{{ key | rename }}</td>
               <td>{{ value }}</td>
             </tr>
@@ -36,11 +36,11 @@
         </table>
         <DownloadButton :fileid="data.engine_options.mangling_file.file_id" :isTaskFile="false" styleclass="btn-small" />
       </b-tab>
-  
+
       <b-tab :title="$t('hashcat.bruteforce_masks')" v-if="data.engine_options.masks !== undefined">
         <table class="table">
           <tbody>
-            <tr v-for="(value, key) in data.engine_options.masks">
+            <tr v-bind:key="key" v-for="(value, key) in data.engine_options.masks">
               <td>{{ key | rename }}</td>
               <td>{{ value }}</td>
             </tr>

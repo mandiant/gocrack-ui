@@ -20,7 +20,7 @@ const getters = {
     if (state.taskEngineStatus.hasOwnProperty(id)) {
       return state.taskEngineStatus[id]
     }
-    return {running: false, status: {}}
+    return { running: false, status: {} }
   },
 
   // getTaskStatusByID returns the current task status ("running", "stopped", etc)
@@ -38,7 +38,7 @@ const actions = {
     commit(muts.REALTIME_CONNECTING)
 
     let { server, base_endpoint } = config.get
-    var es = new EventSource(`${server}${base_endpoint}/realtime/`, { withCredentials: true })  /* eslint camelcase: "off" */
+    var es = new EventSource(`${server}${base_endpoint}/realtime/`, { withCredentials: true }) /* eslint camelcase: "off" */
 
     es.addEventListener('open', function () {
       commit(muts.REALTIME_CONNECTED, { es })

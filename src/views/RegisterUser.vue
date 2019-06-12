@@ -104,7 +104,7 @@ export default {
   methods: {
     submit () {
       this.submittingRequest = true
-      this.$gocrack.createUser({username: this.username, password: this.password, email: this.email}).then(() => {
+      this.$gocrack.createUser({ username: this.username, password: this.password, email: this.email }).then(() => {
         this.submittingRequest = false
         // Log them in!
         this.addToast({
@@ -112,7 +112,7 @@ export default {
           type: 'success',
           dismissAfter: 4000
         })
-        this.$gocrack.login({username: this.username, password: this.password}).then((token) => {
+        this.$gocrack.login({ username: this.username, password: this.password }).then((token) => {
           this.$store.dispatch(storeMutations.LOGIN_SUCCESS, token)
         }).catch((error) => {
           let vm = this

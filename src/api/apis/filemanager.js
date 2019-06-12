@@ -26,7 +26,7 @@ export default {
     let data = new FormData()
     data.append('file', file)
 
-    let axiosconfig = {params: params, data: data}
+    let axiosconfig = { params: params, data: data }
     if (progressFunc !== undefined) {
       axiosconfig.onUploadProgress = progressFunc
     }

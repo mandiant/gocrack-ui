@@ -13,7 +13,7 @@ const languages = {
   }
 }
 
-export function createI18n ({defaultLocale = languages.default}) {
+export function createI18n ({ defaultLocale = languages.default }) {
   var i18n = new VueI18n({
     locale: defaultLocale,
     messages: languages.options

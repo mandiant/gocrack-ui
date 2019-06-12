@@ -120,7 +120,7 @@
             </div>
           </div>
           <v-client-table :data="auditTable.data" :columns="auditTable.columns" :options="auditTable.options">
-            <template slot="h__occurred_at" slot-scope="props">
+            <template slot="h__occurred_at">
               <span>{{ $t('task_status.header_occurred_at') }}</span>
             </template>
             <template slot="occurred_at" slot-scope="props">
@@ -129,15 +129,15 @@
               </div>
             </template>
 
-            <template slot="h__user_id" slot-scope="props">
+            <template slot="h__user_id">
               <span>{{ $t('task_status.header_user_id') }}</span>
             </template>
 
-            <template slot="h__status_code" slot-scope="props">
+            <template slot="h__status_code">
               <span>{{ $t('task_status.header_status_code') }}</span>
             </template>
 
-            <template slot="h__type" slot-scope="props">
+            <template slot="h__type">
               <span>{{ $t('task_status.header_action') }}</span>
             </template>
           </v-client-table>
@@ -160,7 +160,7 @@
                ok-variant="danger"
                :title="deleteModalHeader"
                @ok="deleteTask">
-        <template slot="modal-ok" slot-scope="props">
+        <template slot="modal-ok">
           <span>{{ $t('shared.delete') }}</span>
         </template>
         <p v-html="$t('delete_modal.warning_task')"></p>
@@ -193,7 +193,6 @@ import { ADD_TOAST_MESSAGE } from '../toast'
 
 import StatusTable from '@/components/TaskStatusTable'
 import DisplayFileInfo from '@/components/DisplayFileInfo'
-import DownloadButton from '@/components/DownloadButton'
 import UpdateTaskModal from '@/components/UpdateTaskModal'
 import StopTaskModal from '@/components/StopTaskModal'
 import PasswordTable from '@/components/PasswordTable'
@@ -205,7 +204,6 @@ export default {
   components: {
     StatusTable,
     DisplayFileInfo,
-    DownloadButton,
     UpdateTaskModal,
     StopTaskModal,
     PasswordTable
@@ -224,7 +222,7 @@ export default {
         loaded: false,
         columns: ['occurred_at', 'user_id', 'status_code', 'type'],
         options: {
-          sortIcon: {base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc'}
+          sortIcon: { base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc' }
         }
       }
     }
@@ -283,7 +281,7 @@ export default {
           text: this.$t('delete_modal.success_task'),
           type: 'success'
         })
-        this.$router.push({path: '/tasks'})
+        this.$router.push({ path: '/tasks' })
       }).catch((error) => {
         let vm = this
         helpers.componentToastError(vm, error)

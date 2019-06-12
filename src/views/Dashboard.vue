@@ -115,7 +115,7 @@ export default {
 
   methods: {
     clickedOnTask (event) {
-      this.$router.push({name: 'Task Details', params: { id: event.task_id }})
+      this.$router.push({ name: 'Task Details', params: { id: event.task_id } })
     },
 
     fetchData () {

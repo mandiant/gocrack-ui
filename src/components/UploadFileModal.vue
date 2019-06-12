@@ -1,5 +1,5 @@
 <template>
-  <b-modal 
+  <b-modal
     id="upload-file"
     title="Upload File"
     @ok="uploadFile"
@@ -14,7 +14,7 @@
     <div class="alert alert-danger" role="alert" v-if="error != null">
       <p>{{ error.msg }}</p>
       <ul>
-        <li v-for="err in error.errors">{{ err }}</li>
+        <li v-bind:key="err" v-for="err in error.errors">{{ err }}</li>
       </ul>
     </div>
 
@@ -33,14 +33,14 @@
 
         <b-form-file id="file_input1" v-model="file" ref="uploadFileInput" :placeholder="$t('shared.choose_file')"></b-form-file>
       </div>
-      
+
       <!-- Display the options for a shared file if we're not a task file -->
       <template v-if="!isTaskFile">
         <b-form-group id="isFileShared" label-for="isFileShared"
                       :description="$t('upload_modal.description_is_shared')">
-          <b-form-checkbox 
-            id="isFileShared" 
-            v-model="selectedOptions.isFileShared" 
+          <b-form-checkbox
+            id="isFileShared"
+            v-model="selectedOptions.isFileShared"
             value="true"
             unchecked-value="false"
           >

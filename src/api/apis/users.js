@@ -10,10 +10,10 @@ export default {
   },
 
   modifyUserInfo (apiConfig, userId, payload) {
-    return client.performRequest(apiConfig, 'PATCH', `/users/${userId}`, {data: payload})
+    return client.performRequest(apiConfig, 'PATCH', `/users/${userId}`, { data: payload })
   },
 
   createUser (apiConfig, payload) {
-    return client.performRequest(apiConfig, 'POST', `/users/register`, {data: payload})
+    return client.performRequest(apiConfig, 'POST', `/users/register`, { data: payload })
   }
 }

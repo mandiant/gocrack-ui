@@ -36,17 +36,17 @@ export default {
   },
 
   modifyTask (apiConfig, taskId, payload) {
-    return client.performRequest(apiConfig, 'PATCH', `/task/${taskId}`, {data: payload})
+    return client.performRequest(apiConfig, 'PATCH', `/task/${taskId}`, { data: payload })
   },
 
   createTask (apiConfig, payload) {
-    return client.performRequest(apiConfig, 'POST', `/task/`, {data: payload})
+    return client.performRequest(apiConfig, 'POST', `/task/`, { data: payload })
   },
 
   modifyTaskStatus (apiConfig, taskId, action) {
     console.log(action === apitypes.TASK_START)
     if (action === apitypes.TASK_START || action === apitypes.TASK_STOP) {
-      return client.performRequest(apiConfig, 'PATCH', `/task/${taskId}/status`, {data: {state: action}})
+      return client.performRequest(apiConfig, 'PATCH', `/task/${taskId}/status`, { data: { state: action } })
     }
     throw Error('incorrect action. must be TASK_START or TASK_STOP')
   },

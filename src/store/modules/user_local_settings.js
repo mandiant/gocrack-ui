@@ -16,7 +16,7 @@ const getters = {
 
 const actions = {
   [muts.SET_LANGUAGE] ({ commit, rootState, dispatch }, props) {
-    commit(muts.SET_LANGUAGE, {language: props.language})
+    commit(muts.SET_LANGUAGE, { language: props.language })
   }
 }
 

@@ -33,7 +33,7 @@ export default {
   methods: {
     downloadFile () {
       this.$gocrack.downloadFile(this.fileid, this.isTaskFile ? apitypes.FILE_TASK : apitypes.FILE_ENGINE).then((data) => {
-        let blob = new Blob([data], {type: 'application/octet-stream'})
+        let blob = new Blob([data], { type: 'application/octet-stream' })
         let a = document.createElement('a')
         a.style = 'display: none'
         document.body.appendChild(a)

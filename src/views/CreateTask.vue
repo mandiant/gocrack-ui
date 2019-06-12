@@ -6,10 +6,10 @@
     <b-form @submit="validateBeforeSubmit" class="needs-validation" id="form-create-task">
         <!-- Case Code -->
         <CaseCodeInput :v="$v.casecode" v-model="casecode" />
-  
+
         <!-- Task/Session Name -->
         <TaskNameInput :v="$v.taskname" v-model="taskname" />
-  
+
         <!-- Priority -->
         <b-form-group id="taskPriority"
                       horizontal
@@ -17,7 +17,7 @@
                       :label="$t('shared.priority')">
           <b-form-select v-model="priority" :options="getTaskPriorities" />
         </b-form-group>
-  
+
         <!-- Comment -->
         <b-form-group id="taskComment"
                       horizontal
@@ -28,32 +28,32 @@
                         novalidate
                         :placeholder="$t('create_task.placeholder_comment')" />
         </b-form-group>
-  
+
         <!-- Additional Users -->
         <UserSelection v-on:usr-grant-change="updateAdditionalUsers" />
-  
+
         <!-- Use Devices -->
         <DeviceSelection :v="$v.selectedDevices" v-model="selectedDevices" />
-  
+
         <!-- Engine -->
         <AvailableEngineSelector v-model="engine" />
-  
+
         <!-- File -->
         <TaskFileSelector :v="$v.passwordfile" v-model="passwordfile" ref="fileSelector" />
 
         <TimeLimitInput :v="$v.timelimit" v-model="taskTimeLimit" />
-  
+
         <!-- Hashcat Specific Settings -->
         <template v-if="showHashcatOptions">
           <h3>{{ $t('hashcat.settings_header') }}</h3>
           <hr />
-  
+
           <!-- Hash Type -->
           <HashcatHashTypesSelector v-model="hashcat.hashtype" />
-  
+
           <!-- Attack Mode -->
           <HashcatAttackModeSelector v-model="hashcat.attack_mode" :changed="attackModeChanged" />
-          
+
           <!-- XXX(cschmitt): Refactor these inputs.. they share the same data, although filtered -->
           <!-- Dictionary Only Options -->
           <template v-if="hashcat.attack_mode.id == 0">
@@ -86,7 +86,7 @@
                 </template>
               </div>
             </div>
-  
+
             <div class="form-group row">
               <label for="maskFile" class="col-3 col-form-label">{{ $t('create_task.mangling_file') }}</label>
               <div class="col-9">
@@ -116,7 +116,7 @@
               </div>
             </div>
           </template>
-  
+
           <!-- Brute Force Only Options -->
           <template v-if="hashcat.attack_mode.id == 3">
             <div class="form-group row">
@@ -245,7 +245,6 @@ export default {
           text: this.$t('create_task.invalid_form'),
           type: 'danger'
         })
-        return
       } else {
         this._submitform()
       }
@@ -292,7 +291,7 @@ export default {
 
           result.devices.push(dev.id)
           return result
-        }, {hostname: undefined, devices: []})
+        }, { hostname: undefined, devices: [] })
         payload.assigned_host = payloadDeviceInfo.hostname
         payload.assigned_devices = payloadDeviceInfo.devices
       }
@@ -326,7 +325,7 @@ export default {
 
       payload.payload = enginepayload
       this.$gocrack.createTask(payload).then((data) => {
-        this.$router.push({name: 'Task Details', params: { id: data.taskid }})
+        this.$router.push({ name: 'Task Details', params: { id: data.taskid } })
       }).catch((error) => {
         let vm = this
         helpers.componentToastError(vm, error)

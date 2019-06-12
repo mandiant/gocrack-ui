@@ -14,7 +14,7 @@
       </div>
     </div>
     <v-client-table :data="crackedPasswords" :columns="columns" :options="options"></v-client-table>
-    <PasswordLengthBarGraph></PasswordLengthBarGraph>
+    <!-- <PasswordLengthBarGraph></PasswordLengthBarGraph> -->
   </div>
 </template>
 
@@ -32,7 +32,7 @@ table.passwords td {
 </style>
 
 <script>
-import PasswordLengthBarGraph from '@/components/PasswordLengthBarGraph'
+// import PasswordLengthBarGraph from '@/components/PasswordLengthBarGraph'
 import csvHelpers from '@/helpers/generate_csv'
 import helpers from '@/helpers'
 
@@ -43,9 +43,11 @@ var defaultCounter = {
 }
 
 export default {
+  /*
   components: {
     PasswordLengthBarGraph
   },
+  */
 
   data () {
     return {
@@ -55,7 +57,7 @@ export default {
       hasLoaded: false,
       columns: ['hash', 'value', 'cracked_at'],
       options: {
-        sortIcon: {base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc'},
+        sortIcon: { base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc' },
         orderBy: {
           column: 'cracked_at',
           ascending: false

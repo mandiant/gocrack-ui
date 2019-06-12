@@ -24,7 +24,7 @@ const getters = {
 
 const actions = {
   [muts.NOTIFY_SEND] ({ commit, rootState, dispatch }, payload) {
-    new Notification(  // eslint-disable-line no-new
+    new Notification( // eslint-disable-line no-new
       payload.title || 'GoCrack Notification',
       {
         body: payload.body
@@ -32,16 +32,16 @@ const actions = {
     )
   },
 
-  [muts.NOTIFY_REQUESTED] ({state, commit}) {
+  [muts.NOTIFY_REQUESTED] ({ state, commit }) {
     if (state.granted) {
       return
     }
 
     Notification.requestPermission(function (permission) {
       if (permission === 'granted') {
-        commit(muts.NOTIFY_GRANTED, {granted: true})
+        commit(muts.NOTIFY_GRANTED, { granted: true })
       } else {
-        commit(muts.NOTIFY_GRANTED, {granted: false})
+        commit(muts.NOTIFY_GRANTED, { granted: false })
       }
     })
   }
