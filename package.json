@@ -1,7 +1,13 @@
 {
-  "name": "gocrack-ui-new",
-  "version": "0.1.0",
-  "private": true,
+  "name": "gocrack-ui",
+  "version": "1.2.0",
+  "description": "Web UI for GoCrack",
+  "author": "Christopher Schmitt <chris.schmitt@mandiant.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fireeye/gocrack-ui"
+  },
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
