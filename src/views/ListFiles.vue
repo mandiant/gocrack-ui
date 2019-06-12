@@ -11,38 +11,38 @@
       </div>
       <hr />
     </div>
-  
+
     <div class="files">
       <div class="alert alert-info" role="alert" v-if="loading">
         {{ $t('shared.loading') }}
       </div>
       <v-client-table :data="files" :columns="columns" v-else>
         <!-- Header Changes -->
-        <template slot="h__file_id" slot-scope="props">
+        <template slot="h__file_id">
           <span>{{ $t('shared_headers.file_id') }}</span>
         </template>
-        <template slot="h__uploaded_by" slot-scope="props">
+        <template slot="h__uploaded_by">
           <span>{{ $t('shared_headers.uploaded_by') }}</span>
         </template>
-        <template slot="h__use_in_engine" slot-scope="props">
+        <template slot="h__use_in_engine">
           <span>{{ $t('shared.engine') }}</span>
         </template>
-        <template slot="h__hashes_salts" slot-scope="props">
+        <template slot="h__hashes_salts">
           <span>{{ $t('shared_headers.hashes_n_salts') }}</span>
         </template>
-        <template slot="h__filename" slot-scope="props">
+        <template slot="h__filename">
           <span>{{ $t('shared_headers.filename') }}</span>
         </template>
-        <template slot="h__actions" slot-scope="props">
+        <template slot="h__actions">
           <span>{{ $t('shared.actions') }}</span>
         </template>
-        <template slot="h__uploaded_by" slot-scope="props">
+        <template slot="h__uploaded_by">
           <span>{{ $t('shared_headers.uploaded_by') }}</span>
         </template>
-        <template slot="h__num_entries" slot-scope="props">
+        <template slot="h__num_entries">
           <span>{{ $t('shared_headers.number_entries') }}</span>
         </template>
-        <template slot="h__file_type" slot-scope="props">
+        <template slot="h__file_type">
           <span>{{ $t('shared.file_type') }}</span>
         </template>
 
@@ -71,7 +71,7 @@
         </template>
       </v-client-table>
     </div>
-    
+
     <!-- Delete File Modal -->
     <template>
       <b-modal id="delete-file"
@@ -79,13 +79,13 @@
                 ok-variant="danger"
                 :title="deleteModalHeader"
                 @ok="deleteFile">
-        <template slot="modal-ok" slot-scope="props">
+        <template slot="modal-ok">
           <span>{{ $t('shared.delete') }}</span>
         </template>
         {{ $t('delete_modal.warning_file') }}
       </b-modal>
     </template>
-  
+
     <UploadFileModal :isTaskFile="isTaskFile" v-on:uploaded="refresh" />
   </div>
 </template>
@@ -143,7 +143,7 @@ export default {
     getSharedName (typeId) {
       return apitypes.find((val) => {
         return val.id === typeId
-      }) || {name: 'Unknown'}
+      }) || { name: 'Unknown' }
     },
 
     showDeleteConfirmation (fileID) {

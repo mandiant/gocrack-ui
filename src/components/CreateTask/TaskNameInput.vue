@@ -15,8 +15,7 @@
     </b-form-invalid-feedback>
   </b-form-group>
 </template>
-  
-  
+
 <script>
 import { chCompValidator } from '@/mixins'
 

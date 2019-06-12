@@ -131,7 +131,7 @@ export default {
       new_password: '',
       confirm_password: '',
 
-      _original: null, // _original tracks the response of the initial user info grab and used to calculate the dirty state
+      origrecord: null, // origrecord tracks the response of the initial user info grab and used to calculate the dirty state
       pending_update: false,
       lang: this.getCurrentLanguage
     }
@@ -146,7 +146,7 @@ export default {
 
   watch: {
     lang (value) {
-      this.changeLanguage({language: value})
+      this.changeLanguage({ language: value })
     }
   },
 
@@ -155,7 +155,7 @@ export default {
       this.loaded = true
       this.email = data.email_address
       this.isadmin = data.is_admin
-      this._original = data
+      this.origrecord = data
     }).catch((error) => {
       this.loaded = false
       let vm = this
@@ -187,13 +187,13 @@ export default {
 
     // isdirty detects if the user has changed any fields in the form
     isdirty () {
-      if (!this.loaded || this._original === undefined || this._original === null) {
+      if (!this.loaded || this.origrecord === undefined || this.origrecord === null) {
         return false
       }
 
       if (
-        this._original.email_address !== this.email ||
-        this._original.is_admin !== this.isadmin
+        this.origrecord.email_address !== this.email ||
+        this.origrecord.is_admin !== this.isadmin
       ) {
         return true
       }
@@ -229,11 +229,11 @@ export default {
     _submit_form () {
       // determine the changes to send up
       let payload = {}
-      if (this._original.email_address !== this.email) {
+      if (this.origrecord.email_address !== this.email) {
         payload.email = this.email
       }
 
-      if (this._original.is_admin !== this.isadmin) {
+      if (this.origrecord.is_admin !== this.isadmin) {
         payload.user_is_admin = this.isadmin
       }
 
@@ -256,12 +256,12 @@ export default {
 
       this.$gocrack.modifyUserInfo(this.user_uuid, payload).then((data) => {
         this.addToast({
-          text: `Succesfully modified ${this.user_uuid} - ${this._original.username}`,
+          text: `Succesfully modified ${this.user_uuid} - ${this.origrecord.username}`,
           type: 'success'
         })
 
         if (this.isAdministrator) {
-          this.$router.push({name: 'User Listing'})
+          this.$router.push({ name: 'User Listing' })
         }
       }).catch((error) => {
         this.loaded = false

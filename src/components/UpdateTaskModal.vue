@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="edit-task" 
+  <b-modal id="edit-task"
            title="Edit Task"
            @hidden="clearEditProps"
            @ok="updateTask"
@@ -84,7 +84,7 @@ export default {
 
           result.devices.push(dev.id)
           return result
-        }, {devices: []})
+        }, { devices: [] })
 
         if (payloadDeviceInfo.devices.length > 0) {
           reqpayload.assigned_host = payloadDeviceInfo.hostname
@@ -102,12 +102,12 @@ export default {
         this.$gocrack.modifyTask(this.taskid, reqpayload).then((data) => {
           if (data === true) {
             this.addToast({
-              text: this.$t('edit_modal.modified_successfully', {taskid: this.taskid}),
+              text: this.$t('edit_modal.modified_successfully', { taskid: this.taskid }),
               type: 'success'
             })
           } else {
             this.addToast({
-              text: this.$t('edit_modal.modified_failed', {taskid: this.taskid}),
+              text: this.$t('edit_modal.modified_failed', { taskid: this.taskid }),
               type: 'danger'
             })
             return e.cancel()

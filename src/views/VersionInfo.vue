@@ -7,7 +7,7 @@
           <li>{{ $t('version.ui_version') }}: <a :href="getGithubUrl(true)">{{ ui_version }}</a></li>
           <li>{{ $t('version.compiled_at') }}: {{ data.compiled_at }}</li>
         </ul>
-    
+
         <h4>{{ $t('version.worker_version_info') }}</h4>
         <b-table striped hover :items="data.workers" :fields="workerFields">
           <template slot="engines" slot-scope="data">

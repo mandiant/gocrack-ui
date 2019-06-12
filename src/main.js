@@ -12,23 +12,28 @@ import Vuelidate from 'vuelidate'
 import BootstrapVue from 'bootstrap-vue'
 import VuePlugin from '@/api'
 
+import '@/faloader'
+
 import 'jquery/dist/jquery.slim.min.js'
 import 'popper.js/dist/umd/popper.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
 import 'vue-multiselect/dist/vue-multiselect.min.css'
 
-// Font Awesome Config
-import 'font-awesome/scss/font-awesome.scss'
-import '../config/font-awesome.config.js'
-
 // Custom Components
 import * as CreateTaskComponents from './components/CreateTask'
+
+import * as HashcatComponents from './components/Hashcat'
+
+const tableIcons = {
+  base: 'fa fas',
+  is: 'fa-sort',
+  up: 'fa-sort-alpha-asc',
+  down: 'fa-sort-alpha-desc'
+}
 for (let component in CreateTaskComponents) {
   Vue.component(component, CreateTaskComponents[component])
 }
-
-import * as HashcatComponents from './components/Hashcat'
 for (let component in HashcatComponents) {
   Vue.component(component, HashcatComponents[component])
 }
@@ -37,14 +42,14 @@ Vue.config.productionTip = false
 window.axios = axios
 
 Vue.use(Vuelidate)
-Vue.use(ClientTable, {}, false, 'bootstrap4')
-Vue.use(ServerTable, {}, false, 'bootstrap4')
+Vue.use(ClientTable, { sortIcon: tableIcons }, false, 'bootstrap4')
+Vue.use(ServerTable, { sortIcon: tableIcons }, false, 'bootstrap4')
 Vue.use(BootstrapVue)
 
 // Sync vue's router with the state backend
 sync(store, router)
 
-const i18n = createI18n({defaultLocale: store.getters.getCurrentLanguage})
+const i18n = createI18n({ defaultLocale: store.getters.getCurrentLanguage })
 
 // install some interceptors into axios
 function installInterceptors () {
@@ -55,38 +60,32 @@ function installInterceptors () {
       var response = error.response
       // If we recieve a response that indicates our token has expired, force the user to relog
       if (response.status === 401 && (response.data.hasOwnProperty('expired') && response.data.expired)) {
-        console.log('intercepted an expired token. forcing state change')
+        // console.log('intercepted an expired token. forcing state change')
         store.dispatch(storeMutations.LOGOUT)
       }
     }
     return Promise.reject(error.response)
   })
-
-  console.log('interceptors installed')
 }
 
 installInterceptors()
 
-axios.get('/gocrack-config.json').then(response => {
-  let config = response.data
-  if (config.server === undefined) {
-    router.push({name: 'System Error'})
-    return
-  }
-  Vue.use(VuePlugin, config)
-}).then(() => {
-  store.dispatch('initializeAuthFromStorage').then(success => {
-    console.log('successfully re-initialized auth store')
-    // asynchronously request permissions to browser notifications
-    store.dispatch(storeMutations.NOTIFY_REQUESTED)
-    /* eslint-disable no-new */
-    new Vue({
-      el: '#app',
-      router,
-      i18n,
-      store,
-      template: '<App/>',
-      components: { App }
-    })
+Vue.use(VuePlugin, {
+  'server': 'http://localhost:1338',
+  'base_endpoint': '/api/v2'
+})
+
+store.dispatch('initializeAuthFromStorage').then(success => {
+  // console.log('successfully re-initialized auth store')
+  // asynchronously request permissions to browser notifications
+  store.dispatch(storeMutations.NOTIFY_REQUESTED)
+  /* eslint-disable no-new */
+  new Vue({
+    el: '#app',
+    router,
+    i18n,
+    store,
+    template: '<App/>',
+    components: { App }
   })
 })

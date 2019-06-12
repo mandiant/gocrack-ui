@@ -178,7 +178,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.preventIfLoggedIn)) {
     let user = store.state.auth
     if (user.authenticated) {
-      next({path: '/'})
+      next({ path: '/' })
       return
     }
   }
@@ -187,7 +187,7 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requireAdminToken)) {
     let user = store.state.auth
     if (!user.is_admin) {
-      next({path: '/unauthorized'})
+      next({ path: '/unauthorized' })
       return
     }
   }

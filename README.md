@@ -1,18 +1,31 @@
-# gocrackui
-
-> Web UI for GoCrack
+# GoCrack UI
 
 Welcome! This includes the UI related code for [GoCrack](https://github.com/fireeye/gocrack).
 
-## Build Setup
+## Project setup
+```
+yarn install
+```
 
-``` bash
-# install dependencies
-yarn
+### Compiles and hot-reloads for development
+```
+yarn run serve
+```
 
-# serve with hot reload at localhost:8080
-yarn run dev
-
-# build for production with minification
+### Compiles and minifies for production
+```
 yarn run build
 ```
+
+### Run your tests
+```
+yarn run test
+```
+
+### Lints and fixes files
+```
+yarn run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).

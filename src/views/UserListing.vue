@@ -25,7 +25,7 @@ export default {
 
   methods: {
     onRow (event) {
-      this.$router.push({name: 'Edit User', params: { id: event.row.user_uuid }})
+      this.$router.push({ name: 'Edit User', params: { id: event.row.user_uuid } })
     }
   },
 

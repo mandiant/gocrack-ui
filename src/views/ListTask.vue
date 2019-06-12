@@ -4,7 +4,7 @@
     <hr />
 
     <v-server-table url="" :columns="columns" :options="options" name="tasks-table" @row-click="onRow" @loaded="onLoad" ref="tasktable">
-      <template slot="h__task_id" slot-scope="props">
+      <template slot="h__task_id">
         <span>{{ $t('list_tasks.header_task_id') }}</span>
       </template>
       <template slot="task_id" slot-scope="props">
@@ -13,11 +13,11 @@
         </div>
       </template>
 
-      <template slot="h__task_name" slot-scope="props">
+      <template slot="h__task_name">
         <span>{{ $t('shared.task_name') }}</span>
       </template>
 
-      <template slot="h__case_code" slot-scope="props">
+      <template slot="h__case_code">
         <span>{{ $t('shared.casecode') }}</span>
       </template>
       <template slot="case_code" slot-scope="props">
@@ -26,7 +26,7 @@
         </div>
       </template>
 
-      <template slot="h__cracked_stats" slot-scope="props">
+      <template slot="h__cracked_stats">
         <span>{{ $t('list_tasks.header_cracked_total') }}</span>
       </template>
 
@@ -36,15 +36,15 @@
         </div>
       </template>
 
-      <template slot="h__status" slot-scope="props">
+      <template slot="h__status">
         <span>{{ $t('shared.status') }}</span>
       </template>
 
-      <template slot="h__created_by" slot-scope="props">
+      <template slot="h__created_by">
         <span>{{ $t('shared.created_by') }}</span>
       </template>
 
-      <template slot="h__created_at" slot-scope="props">
+      <template slot="h__created_at">
         <span>{{ $t('shared.created_at') }}</span>
       </template>
       <template slot="created_at" slot-scope="props">
@@ -64,7 +64,7 @@ export default {
       loaded: false,
       columns: ['task_id', 'task_name', 'case_code', 'cracked_stats', 'status', 'created_by', 'created_at'],
       options: {
-        sortIcon: {base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc'},
+        sortIcon: { base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc' },
         orderBy: {
           column: 'created_at',
           ascending: false
@@ -81,7 +81,7 @@ export default {
   methods: {
     // If a user clicks a row, send them to the details page
     onRow (event) {
-      this.$router.push({name: 'Task Details', params: { id: event.row.task_id }})
+      this.$router.push({ name: 'Task Details', params: { id: event.row.task_id } })
     },
 
     onLoad (resp) {
