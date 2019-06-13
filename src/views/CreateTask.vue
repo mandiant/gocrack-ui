@@ -256,7 +256,7 @@ export default {
       event.stopPropagation()
 
       if (this.$v.$invalid) {
-        $('html, body').animate({ scrollTop: 0 }, 'fast')
+        window.scrollTo(0, 0)
         this.addToast({
           text: this.$t('create_task.invalid_form'),
           type: 'danger'
