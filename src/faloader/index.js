@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { library, dom } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faUserCircle, faEdit, faSearch, faLifeRing, faSort, faArrowUp, faArrowDown, faChevronLeft, faChevronRight, faSortAlphaDown, faSortAlphaUp } from '@fortawesome/free-solid-svg-icons'
+import { faUserCircle, faEdit, faSearch, faLifeRing, faSort, faArrowUp, faArrowDown, faChevronLeft, faChevronRight, faSortAlphaDown, faSortAlphaUp, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
   faUserCircle,
@@ -15,7 +15,8 @@ library.add(
   faChevronLeft,
   faChevronRight,
   faSortAlphaDown,
-  faSortAlphaUp
+  faSortAlphaUp,
+  faSignOutAlt
 )
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)

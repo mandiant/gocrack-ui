@@ -1,6 +1,7 @@
 <template>
   <b-form-group id="taskName"
-                horizontal
+                label-cols-sm="4"
+                label-cols-lg="3"
                 :description="$t('create_task.description_taskname')"
                 :label="$t('create_task.taskname')">
     <b-form-input id="taskName"

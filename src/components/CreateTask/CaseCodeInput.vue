@@ -1,6 +1,7 @@
 <template>
   <b-form-group id="caseCode"
-                horizontal
+                label-cols-sm="4"
+                label-cols-lg="3"
                 :description="$t('create_task.description_casecode')"
                 :label="$t('shared.casecode')">
     <b-form-input id="caseCode"

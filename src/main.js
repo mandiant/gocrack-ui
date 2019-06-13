@@ -31,9 +31,11 @@ const tableIcons = {
   up: 'fa-sort-alpha-asc',
   down: 'fa-sort-alpha-desc'
 }
+
 for (let component in CreateTaskComponents) {
   Vue.component(component, CreateTaskComponents[component])
 }
+
 for (let component in HashcatComponents) {
   Vue.component(component, HashcatComponents[component])
 }

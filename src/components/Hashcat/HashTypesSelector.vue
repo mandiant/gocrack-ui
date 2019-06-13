@@ -1,6 +1,7 @@
 <template>
     <b-form-group id="hashcat-hashtype"
-                  horizontal
+                  label-cols-sm="4"
+                  label-cols-lg="3"
                   :description="$t('create_task.description_hashtype')"
                   :label="$t('create_task.hashtype')">
       <multiselect v-model="internalValue"

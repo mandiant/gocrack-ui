@@ -1,6 +1,7 @@
 <template>
   <b-form-group id="task-file"
-                horizontal
+                label-cols-sm="4"
+                label-cols-lg="3"
                 :description="$t('create_task.description_file')"
                 :label="$t('create_task.file')">
     <b-form-row>
