@@ -11,18 +11,29 @@ import axios from 'axios'
 import Vuelidate from 'vuelidate'
 import BootstrapVue from 'bootstrap-vue'
 import VuePlugin from '@/api'
+import * as Sentry from '@sentry/browser'
+import * as Integrations from '@sentry/integrations'
 
 import '@/faloader'
+import config from '@/config'
 
 import 'popper.js/dist/umd/popper.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
-
 import 'vue-multiselect/dist/vue-multiselect.min.css'
 
 // Custom Components
 import * as CreateTaskComponents from './components/CreateTask'
 
 import * as HashcatComponents from './components/Hashcat'
+
+if (config.SENTRY_DSN !== '') {
+  console.log('Sentry enabled')
+
+  Sentry.init({
+    dsn: 'https://<key>@sentry.io/<project>',
+    integrations: [new Integrations.Vue({ Vue, attachProps: true })]
+  })
+}
 
 const tableIcons = {
   base: 'fa fas',
