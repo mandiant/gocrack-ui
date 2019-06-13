@@ -68,7 +68,7 @@ export default {
 
   methods: {
     getGithubUrl (isUI = false) {
-      let ver = isUI ? this.ui_version : this.data.version
+      let ver = isUI ? this.getAppVersion : this.data.version
       let rev = (this.data !== null ? ver : 'master')
       return isUI ? `https://github.com/fireeye/gocrack-ui/tree/${rev}` : `https://github.com/fireeye/gocrack/tree/${rev}`
     }
