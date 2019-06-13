@@ -36,9 +36,6 @@
         <template slot="h__actions">
           <span>{{ $t('shared.actions') }}</span>
         </template>
-        <template slot="h__uploaded_by">
-          <span>{{ $t('shared_headers.uploaded_by') }}</span>
-        </template>
         <template slot="h__num_entries">
           <span>{{ $t('shared_headers.number_entries') }}</span>
         </template>
