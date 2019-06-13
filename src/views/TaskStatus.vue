@@ -119,7 +119,7 @@
               </ul>
             </div>
           </div>
-          <v-client-table :data="auditTable.data" :columns="auditTable.columns" :options="auditTable.options">
+          <v-client-table :data="auditTable.data" :columns="auditTable.columns">
             <template slot="h__occurred_at">
               <span>{{ $t('task_status.header_occurred_at') }}</span>
             </template>
@@ -220,10 +220,7 @@ export default {
       auditTable: {
         data: [],
         loaded: false,
-        columns: ['occurred_at', 'user_id', 'status_code', 'type'],
-        options: {
-          sortIcon: { base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc' }
-        }
+        columns: ['occurred_at', 'user_id', 'status_code', 'type']
       }
     }
   },

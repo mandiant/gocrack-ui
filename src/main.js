@@ -28,8 +28,8 @@ import * as HashcatComponents from './components/Hashcat'
 const tableIcons = {
   base: 'fa fas',
   is: 'fa-sort',
-  up: 'fa-sort-alpha-asc',
-  down: 'fa-sort-alpha-desc'
+  up: 'fa-sort-alpha-up',
+  down: 'fa-sort-alpha-down'
 }
 
 for (let component in CreateTaskComponents) {

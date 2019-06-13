@@ -57,7 +57,6 @@ export default {
       hasLoaded: false,
       columns: ['hash', 'value', 'cracked_at'],
       options: {
-        sortIcon: { base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc' },
         orderBy: {
           column: 'cracked_at',
           ascending: false
