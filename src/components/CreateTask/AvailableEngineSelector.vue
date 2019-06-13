@@ -1,6 +1,7 @@
 <template>
   <b-form-group id="cracking-engines"
-                horizontal
+                label-cols-sm="4"
+                label-cols-lg="3"
                 :description="$t('create_task.description_engine')"
                 :label="$t('shared.engine')">
     <multiselect v-model="internalValue"

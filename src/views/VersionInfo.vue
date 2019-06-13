@@ -3,8 +3,9 @@
     <h2>{{ $t('name') }}</h2>
     <div v-if="loaded">
       <ul>
-          <li>{{ $t('version.server_version') }}: <a :href="getGithubUrl()">{{ data.version }}</a></li>
-          <li>{{ $t('version.ui_version') }}: <a :href="getGithubUrl(true)">{{ ui_version }}</a></li>
+          <li>{{ $t('version.server') }}: <a :href="getGithubUrl()">{{ data.version }}</a></li>
+          <li>{{ $t('version.ui') }}: <a :href="getGithubUrl(true)">{{ getAppVersion }}</a></li>
+          <li>{{ $t('version.vue') }}: <a>{{ getVueVersion }}</a></li>
           <li>{{ $t('version.compiled_at') }}: {{ data.compiled_at }}</li>
         </ul>
 
@@ -24,13 +25,15 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import config from '@/config'
+
 export default {
   data () {
     return {
       data: null,
       loaded: false,
-      workerFields: ['hostname', 'version', 'engines'],
-      ui_version: VERSION // From git-revision-webpack-plugin
+      workerFields: ['hostname', 'version', 'engines']
     }
   },
 
@@ -52,6 +55,14 @@ export default {
         return ''
       }
       return ` - ${date.getFullYear()}`
+    },
+
+    getAppVersion () {
+      return config.APP_VERSION
+    },
+
+    getVueVersion () {
+      return Vue.version
     }
   },
 

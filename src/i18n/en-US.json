@@ -83,7 +83,9 @@
         "error_no_taskfile": "A file is required to crack",
         "placeholder_taskfile": "Select password(s) to crack",
         "invalid_form": "Please correct all validation errors before continuing",
-        "error_invalid_engine": "Invalid Engine"
+        "error_invalid_engine": "Invalid Engine",
+        "disable_optimization": "Disable Optimized Engine",
+        "disable_optimization_description": "Checking this box will disable the optimized OpenCL kernel for hashcat. This allows you to crack passwords greater than length 32 at the cost of performance/cracking speed"
     },
     "task_status": {
         "cracked_passwords_header": "Cracked Passwords",
@@ -136,7 +138,8 @@
         "choose_file": "Choose a File to Upload...",
         "license": "License",
         "submit": "Submit",
-        "please_wait": "Please wait..."
+        "please_wait": "Please wait...",
+        "disabled": "Disabled"
     },
     "upload_modal": {
         "engine": "Engine",
@@ -244,11 +247,12 @@
         "dictionary_file": "Dictionary File"
     },
     "version": {
-        "server_version": "Server Version",
-        "ui_version": "UI Version",
+        "server": "Server Version",
+        "ui": "UI Version",
         "compiled_at": "Compiled At",
         "worker_version_info": "Worker Version Info",
-        "loading": "Loading version information..."
+        "loading": "Loading version information...",
+        "vue": "Vue.JS Version"
     },
     "selector_file": {
         "file_id": "File ID: {id}",

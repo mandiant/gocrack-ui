@@ -64,7 +64,6 @@ export default {
       loaded: false,
       columns: ['task_id', 'task_name', 'case_code', 'cracked_stats', 'status', 'created_by', 'created_at'],
       options: {
-        sortIcon: { base: 'fa', up: 'fa-sort-asc', down: 'fa-sort-desc' },
         orderBy: {
           column: 'created_at',
           ascending: false

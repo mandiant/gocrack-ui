@@ -1,6 +1,7 @@
 <template>
     <b-form-group id="hashcat-attack-mode"
-                  horizontal
+                  label-cols-sm="4"
+                  label-cols-lg="3"
                   :description="$t('create_task.description_attack_mode')"
                   :label="$t('create_task.attack_mode')">
       <multiselect v-model="internalValue"

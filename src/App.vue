@@ -28,7 +28,7 @@
 
           <b-nav-item-dropdown :text="getAuthDetails.username" right>
             <b-dropdown-item to="/users/edit" exact><i class="fa fa-edit" aria-hidden="true"></i> {{ $t('shared.edit_settings') }}</b-dropdown-item>
-            <b-dropdown-item @click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> {{ $t('shared.logout') }}</b-dropdown-item>
+            <b-dropdown-item @click="logout"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> {{ $t('shared.logout') }}</b-dropdown-item>
           </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>

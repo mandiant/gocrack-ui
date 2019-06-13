@@ -1,6 +1,7 @@
 <template>
   <b-form-group id="taskTimeLimit"
-                horizontal
+                label-cols-sm="4"
+                label-cols-lg="3"
                 :description="$t('create_task.taskTimeLimit_description')"
                 :label="$t('create_task.taskTimeLimit')">
     <b-form-input id="taskTimeLimit"

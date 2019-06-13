@@ -12,7 +12,8 @@
 
         <!-- Priority -->
         <b-form-group id="taskPriority"
-                      horizontal
+                      label-cols-sm="4"
+                      label-cols-lg="3"
                       :description="$t('create_task.description_priority')"
                       :label="$t('shared.priority')">
           <b-form-select v-model="priority" :options="getTaskPriorities" />
@@ -20,7 +21,8 @@
 
         <!-- Comment -->
         <b-form-group id="taskComment"
-                      horizontal
+                      label-cols-sm="4"
+                      label-cols-lg="3"
                       :label="$t('shared.comment')">
           <b-form-input id="taskComment"
                         type="text"
@@ -47,6 +49,20 @@
         <template v-if="showHashcatOptions">
           <h3>{{ $t('hashcat.settings_header') }}</h3>
           <hr />
+
+          <b-form-group
+            label-cols-sm="4"
+            label-cols-lg="3"
+            :description="$t('create_task.disable_optimization_description')"
+            :label="$t('create_task.disable_optimization')"
+            id="disableOptimizedEngine">
+              <b-form-checkbox
+                v-model="hashcat.disable_optimizations"
+                value="true"
+                unchecked-value="false">
+                {{ $t('shared.disabled') }}
+              </b-form-checkbox>
+          </b-form-group>
 
           <!-- Hash Type -->
           <HashcatHashTypesSelector v-model="hashcat.hashtype" />
@@ -240,7 +256,7 @@ export default {
       event.stopPropagation()
 
       if (this.$v.$invalid) {
-        $('html, body').animate({ scrollTop: 0 }, 'fast')
+        window.scrollTo(0, 0)
         this.addToast({
           text: this.$t('create_task.invalid_form'),
           type: 'danger'
@@ -388,7 +404,8 @@ export default {
         dictionary: null,
         manglingrules: null,
         passwordmasks: null,
-        hashtype: null
+        hashtype: null,
+        disable_optimizations: false
       },
       loading_enginefiles: false,
       submitting_task: false,

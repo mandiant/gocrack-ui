@@ -14,7 +14,6 @@ import VuePlugin from '@/api'
 
 import '@/faloader'
 
-import 'jquery/dist/jquery.slim.min.js'
 import 'popper.js/dist/umd/popper.min.js'
 import 'bootstrap/dist/js/bootstrap.min.js'
 
@@ -28,12 +27,14 @@ import * as HashcatComponents from './components/Hashcat'
 const tableIcons = {
   base: 'fa fas',
   is: 'fa-sort',
-  up: 'fa-sort-alpha-asc',
-  down: 'fa-sort-alpha-desc'
+  up: 'fa-sort-alpha-up',
+  down: 'fa-sort-alpha-down'
 }
+
 for (let component in CreateTaskComponents) {
   Vue.component(component, CreateTaskComponents[component])
 }
+
 for (let component in HashcatComponents) {
   Vue.component(component, HashcatComponents[component])
 }
