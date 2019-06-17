@@ -27,10 +27,10 @@ import * as CreateTaskComponents from './components/CreateTask'
 import * as HashcatComponents from './components/Hashcat'
 
 if (config.SENTRY_DSN !== undefined || (config.SENTRY_DSN !== undefined && config.SENTRY_DSN !== '')) {
-  console.log('Sentry enabled', config.SENTRY_DSN)
+  console.log('Sentry enabled')
 
   Sentry.init({
-    dsn: 'https://<key>@sentry.io/<project>',
+    dsn: config.SENTRY_DSN,
     integrations: [new Integrations.Vue({ Vue, attachProps: true })]
   })
 }
