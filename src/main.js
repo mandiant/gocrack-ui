@@ -26,11 +26,11 @@ import * as CreateTaskComponents from './components/CreateTask'
 
 import * as HashcatComponents from './components/Hashcat'
 
-if (config.SENTRY_DSN !== '') {
+if (config.SENTRY_DSN !== undefined || (config.SENTRY_DSN !== undefined && config.SENTRY_DSN !== '')) {
   console.log('Sentry enabled')
 
   Sentry.init({
-    dsn: 'https://<key>@sentry.io/<project>',
+    dsn: config.SENTRY_DSN,
     integrations: [new Integrations.Vue({ Vue, attachProps: true })]
   })
 }
@@ -41,6 +41,8 @@ const tableIcons = {
   up: 'fa-sort-alpha-up',
   down: 'fa-sort-alpha-down'
 }
+
+const debug = process.env.NODE_ENV !== 'production'
 
 for (let component in CreateTaskComponents) {
   Vue.component(component, CreateTaskComponents[component])
@@ -82,9 +84,15 @@ function installInterceptors () {
 
 installInterceptors()
 
+let BASE_URL = `${window.location.protocol}//${window.location.host}`
+
+if (debug) {
+  BASE_URL = 'http://' + window.location.hostname + ':1338'
+}
+
 Vue.use(VuePlugin, {
-  'server': 'http://localhost:1338',
-  'base_endpoint': '/api/v2'
+  server: BASE_URL,
+  base_endpoint: '/api/v2'
 })
 
 store.dispatch('initializeAuthFromStorage').then(success => {

@@ -2,7 +2,6 @@
   <div class="create-task">
     <h2>{{ $t('navbar.create_task') }}</h2>
     <hr />
-    <!-- <pre>{{ $v }}</pre> -->
     <b-form @submit="validateBeforeSubmit" class="needs-validation" id="form-create-task">
         <!-- Case Code -->
         <CaseCodeInput :v="$v.casecode" v-model="casecode" />
@@ -222,15 +221,21 @@ export default {
 
   mounted () {
     this.$refs.fileSelector.$on('input', this.fileSelected)
-    this.$refs.fileUploadModal.$on('uploaded', this.fileSelected)
+    this.$refs.fileUploadModal.$on('uploaded', this.fileUploaded)
   },
 
   beforeDestroy () {
     this.$refs.fileSelector.$off('input', this.fileSelected)
-    this.$refs.fileUploadModal.$off('uploaded', this.fileSelected)
+    this.$refs.fileUploadModal.$off('uploaded', this.fileUploaded)
   },
 
   methods: {
+    fileUploaded (event) {
+      this.fileSelected(event)
+      // This is a giant hack..oh well
+      this.$refs.fileSelector.updateInternalState(this.passwordfile)
+    },
+
     // fileSelected is called whenever a file is uploaded from the modal
     fileSelected (event) {
       this.passwordfile = {
