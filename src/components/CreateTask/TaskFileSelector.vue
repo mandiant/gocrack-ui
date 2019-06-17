@@ -70,6 +70,10 @@ export default {
         let vm = this
         helpers.componentToastError(vm, error)
       })
+    },
+
+    updateInternalState (e) {
+      this.internalValue = e
     }
   }
 }
