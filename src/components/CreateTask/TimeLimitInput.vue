@@ -19,6 +19,11 @@
 import { chCompValidator } from '@/mixins'
 
 export default {
-  mixins: [chCompValidator]
+  mixins: [chCompValidator],
+  data () {
+    return {
+      text: '172,800'
+    }
+  }
 }
 </script>
