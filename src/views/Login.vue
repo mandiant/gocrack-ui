@@ -4,10 +4,10 @@
       <h2 class="form-signin-heading">{{ $t('login.header') }}</h2>
       <input type="username" id="inputUsername" class="form-control" :placeholder="$t('login.placeholder_username')" v-model="credentials.username" autofocus>
       <input type="password" id="inputPassword" class="form-control" :placeholder="$t('login.placeholder_password')" v-model="credentials.password">
+      <button class="btn btn-lg btn-primary btn-block" :disabled="isAuthPending" @click="submit()">{{ $t('login.button_login') }}</button>
       <router-link to="/register" exact>
         <a href="#" class="btn btn-success btn-lg btn-block" role="button" aria-pressed="true" v-if="canUserRegister">{{ $t('login.register') }}</a>
       </router-link>
-      <button class="btn btn-lg btn-primary btn-block" :disabled="isAuthPending" @click="submit()">{{ $t('login.button_login') }}</button>
     </form>
   </div>
 </template>
