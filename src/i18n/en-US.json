@@ -76,7 +76,7 @@
         "description_users": "Users that will receive emails when passwords crack and who will have access to this task via this web interface.",
         "description_priority": "Relative priority of this task. Used to allocate GPUs and to prioritize tasks on the queue when necessary. If using a Higher priority, you may want to indicate why in the comment field.",
         "taskTimeLimit": "Runtime Limit",
-        "taskTimeLimit_description": "The total runtime in seconds this job is allowed to run before it is automatically stopped",
+        "taskTimeLimit_description": "The total runtime in seconds this job is allowed to run before it is automatically stopped. (default is 172,800 seconds, or 48 hours)",
         "error_taskTimeLimit": "The time limit must be expressed as an integer (in seconds)",
         "error_casecode": "The Case Code is required and must be at least 4 characters",
         "error_taskname": "The Task Name is required and must be at least 10 characters",
