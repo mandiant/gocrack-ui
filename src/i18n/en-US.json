@@ -9,7 +9,8 @@
         "admin": "Admin Settings",
         "users": "Users",
         "edit_user": "Edit User",
-        "version": "Version"
+        "version": "Version",
+        "dark_mode": "Dark Mode"
     },
     "login": {
         "header": "Log In",
@@ -127,6 +128,7 @@
         "status": "Status",
         "error": "Error",
         "created_at": "Created At",
+        "timeout_at": "Timeout At",
         "language": "Language",
         "task_name": "Task Name",
         "delete": "Delete",
@@ -139,7 +141,8 @@
         "license": "License",
         "submit": "Submit",
         "please_wait": "Please wait...",
-        "disabled": "Disabled"
+        "disabled": "Disabled",
+        "never": "Never"
     },
     "upload_modal": {
         "engine": "Engine",

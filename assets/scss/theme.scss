@@ -1,0 +1,113 @@
+:root {
+  --theme-dark-bg: #343a40;
+  --theme-border-color: #dee2e6;
+  --theme-bg-color: #fff;
+  --theme-body-color: #212529;
+  --theme-card-bg: #fff;
+  --theme-card-border-color: rgba(00, 00, 00, .125);
+  --theme-card-cap-bg: rgba(00, 00, 00, .03);
+  --theme-hr-border-color: rgba(00, 00, 00, .1);
+  --theme-input-bg: #fff;
+  --theme-input-border-color: #ced4da;
+  --theme-input-color: #495057;
+  --theme-input-disabled-bg: #e9ecef;
+  --theme-input-group-addon-bg: #e9ecef;
+  --theme-dropdown-bg: #fff;
+  --theme-dropdown-link-color: #212529;
+  --theme-table-accent-bg: rgba(00, 00, 00, .05);
+}
+
+:root[data-theme="dark"] {
+  --theme-dark-bg: rgba(00, 00, 00, .09);
+  --theme-border-color:  #343a40;
+  --theme-bg-color: #212529;
+  --theme-body-color: #fff;
+  --theme-card-bg: #212529;
+  --theme-card-border-color: rgba(00, 00, 00, .5);
+  --theme-card-cap-bg: rgba(00, 00, 00, .12);
+  --theme-hr-border-color: rgba(00, 00, 00, .4);
+  --theme-input-bg: #343a40;
+  --theme-input-border-color: rgba(00, 00, 00, .4);
+  --theme-input-color: #f8f9fa;
+  --theme-input-disabled-bg: #212529;
+  --theme-input-group-addon-bg: #111215;
+  --theme-dropdown-bg: #343a40;
+  --theme-dropdown-link-color: #fff;
+  --theme-table-accent-bg: rgba(00, 00, 00, .2);
+}
+
+// Body
+$body-bg:    var(--theme-bg-color);
+$body-color: var(--theme-body-color);
+
+// Components
+//
+// Define common padding and border radius sizes and more.
+$border-color: var(--theme-border-color);
+
+// Cards
+$card-bg:           var(--theme-card-bg);
+$card-border-color: var(--theme-card-border-color);
+$card-cap-bg:       var(--theme-card-cap-bg);
+
+// Typography
+$hr-border-color: var(--theme-hr-border-color);
+
+// Forms
+$input-bg:              var(--theme-input-bg);
+$input-border-color:    var(--theme-input-border-color);
+$input-disabled-bg:     var(--theme-input-disabled-bg);
+$input-color:           var(--theme-input-color);
+$input-group-addon-bg: var(--theme-input-group-addon-bg);
+
+// Dropdowns
+//
+// Dropdown menu container and contents.
+$dropdown-bg:         var(--theme-dropdown-bg);
+$dropdown-link-color: var(--theme-dropdown-link-color);
+
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+$table-accent-bg: var(--theme-table-accent-bg);
+
+// Modals
+$modal-content-bg: var(--theme-bg-color);
+
+.theme-dark {
+    background-color: var(--theme-dark-bg);
+}
+
+.multiselect {
+  .multiselect__single {
+    background: var(--theme-input-bg);
+    border-color: var(--theme-input-border-color);
+    color: var(--theme-input-color);
+  }
+
+  .multiselect__tags {
+    background: var(--theme-input-bg);
+    border-color: var(--theme-input-border-color);
+    color: var(--theme-input-color);
+  }
+
+  .multiselect__input {
+    background: var(--theme-input-bg);
+    border-color: var(--theme-input-border-color);
+    color: var(--theme-input-color);
+  }
+
+  .multiselect__content-wrapper {
+    background: var(--theme-input-bg);
+    border-color: var(--theme-input-border-color);
+    color: var(--theme-input-color);
+  }
+
+  .multiselect__spinner {
+    background: var(--theme-input-bg);
+  }
+}
+
+.page-link {
+    background: var(--theme-input-bg) !important;
+}

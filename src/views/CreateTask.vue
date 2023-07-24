@@ -290,7 +290,7 @@ export default {
         priority: this.priority
       }
 
-      if (this.taskTimeLimit !== null) {
+      if (this.taskTimeLimit !== null && this.taskTimeLimit !== '') {
         payload.task_duration = parseInt(this.taskTimeLimit)
       }
 
@@ -428,7 +428,7 @@ export default {
       selectedDevices: [],
       additionalUsers: [],
       priority: 1,
-      taskTimeLimit: null
+      taskTimeLimit: '172800'
     }
   },
 

@@ -36,16 +36,19 @@
 
       <!-- Display the options for a shared file if we're not a task file -->
       <template v-if="!isTaskFile">
-        <b-form-group id="isFileShared" label-for="isFileShared"
+        <b-form-group id="isFileShared" label-for="is-file-shared"
                       :description="$t('upload_modal.description_is_shared')">
-          <b-form-checkbox
-            id="isFileShared"
-            v-model="selectedOptions.isFileShared"
-            value="true"
-            unchecked-value="false"
-          >
-            {{ $t('upload_modal.is_shared')}}
-          </b-form-checkbox>
+
+        <b-form-checkbox
+          id="is-file-shared"
+          v-model="selectedOptions.isFileShared"
+          name="is-file-shared"
+          value="true"
+          unchecked-value="false"
+        >
+          {{ $t('upload_modal.is_shared')}}
+        </b-form-checkbox>
+
         </b-form-group>
 
         <b-form-group id="selectFileType" label-for="selectFileType" :label="$t('shared.file_type')">
@@ -123,7 +126,7 @@ export default {
         file_type: apitypes.ENGINE_FILE_TYPES[0],
         selectedEngineForTask: (this.isTaskFile ? apitypes.TASK_FILE_FOR_ENGINE[1] : null),
         hashcat_type: null,
-        isFileShared: 'no'
+        isFileShared: 'false'
       },
       hashcatTypeDropdown: {
         loading: false,
@@ -160,7 +163,8 @@ export default {
       this.selectedOptions = {
         file_type: apitypes.ENGINE_FILE_TYPES[0],
         selectedEngineForTask: (this.isTaskFile ? apitypes.TASK_FILE_FOR_ENGINE[1] : null),
-        hashcat_type: null
+        hashcat_type: null,
+        isFileShared: 'false'
       }
       this.uploadProgress = 0
       this.$refs.uploadFileInput.reset()
