@@ -61,6 +61,15 @@
                     <td>{{ new Date(taskInfo.info.created_at).toString() }} </td>
                   </tr>
                   <tr>
+                    <td>{{ $t('shared.timeout_at') }}</td>
+                    <td v-if="taskInfo.info.task_duration !== undefined && taskInfo.info.task_duration !== null && taskInfo.info.task_duration !== 0">
+                      {{ new Date(new Date(taskInfo.info.created_at).getTime() + (1000 * taskInfo.info.task_duration)).toString() }}
+                    </td>
+                    <td v-else>
+                      {{ $t('shared.never') }}
+                    </td>
+                  </tr>
+                  <tr>
                     <td>{{ $t('shared.engine') }}</td>
                     <td>{{ taskInfo.info.engine }}</td>
                   </tr>

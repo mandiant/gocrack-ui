@@ -11,6 +11,7 @@
         label="username"
         id="additionalUsers"
         placeholder="Add a user"
+        v-model="internal_value"
         @open="onUsersSelectOpen"
         @input="onInput" />
       <small class="form-text text-muted">{{ $t('create_task.description_users') }}</small>
@@ -31,7 +32,8 @@ export default {
   data () {
     return {
       loading: false,
-      users: []
+      users: [],
+      internal_value: []
     }
   },
 

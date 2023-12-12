@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <b-navbar toggleable="md" type="dark" variant="dark">
+    <b-navbar toggleable="md" type="dark" class="theme-dark">
       <b-nav-toggle target="nav_collapse"></b-nav-toggle>
       <b-navbar-brand to="/">{{ $t('name') }}</b-navbar-brand>
 
@@ -27,6 +27,19 @@
           </b-nav-form>
 
           <b-nav-item-dropdown :text="getAuthDetails.username" right>
+            <b-dropdown-form>
+              <b-form-checkbox
+                id="dark-mode"
+                v-model="theme"
+                name="dark-mode"
+                value="dark"
+                unchecked-value=""
+                switch
+                class="ml-2"
+              >
+                {{ $t("navbar.dark_mode") }}
+              </b-form-checkbox>
+            </b-dropdown-form>
             <b-dropdown-item to="/users/edit" exact><i class="fa fa-edit" aria-hidden="true"></i> {{ $t('shared.edit_settings') }}</b-dropdown-item>
             <b-dropdown-item @click="logout"><i class="fa fa-sign-out-alt" aria-hidden="true"></i> {{ $t('shared.logout') }}</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -76,7 +89,21 @@ export default {
       'userIsLoggedIn',
       'isAdministrator',
       'getAuthDetails'
-    ])
+    ]),
+
+    theme: {
+      get: function () {
+        return localStorage.getItem('theme')
+      },
+      set: function (theme) {
+        document.documentElement.dataset.theme = theme
+        localStorage.setItem('theme', theme)
+      }
+    }
+  },
+
+  mounted () {
+    document.documentElement.dataset.theme = this.theme
   },
 
   methods: {
