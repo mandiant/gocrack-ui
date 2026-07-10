@@ -1,0 +1,111 @@
+{
+  "name": "repo-repos-gocrack-ui",
+  "root": "repos/gocrack-ui",
+  "projectType": "library",
+  "targets": {
+    "status": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "git -C repos/gocrack-ui status --short || true"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "fetch": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "git -C repos/gocrack-ui fetch --all --prune || true"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "log": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "git -C repos/gocrack-ui log --oneline -10 || true"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "manifests": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "find repos/gocrack-ui \\( -name package.json -o -name pyproject.toml -o -name Cargo.toml -o -name go.mod -o -name setup.py \\) -not -path '*/node_modules/*' -not -path '*/testdata/*' -not -path '*/fixtures/*' -print | sort"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "node-install": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sh -lc 'cd repos/gocrack-ui && npm install'"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "node-test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sh -lc 'cd repos/gocrack-ui && npm test --if-present'"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "node-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sh -lc 'cd repos/gocrack-ui && npm run build --if-present'"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "node-lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sh -lc 'cd repos/gocrack-ui && npm run lint --if-present'"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "node-audit": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sh -lc 'cd repos/gocrack-ui && npm audit --audit-level=high || true'"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "security-node": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sh -lc 'cd repos/gocrack-ui && npm audit --audit-level=high || true'"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    },
+    "security": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sh -lc 'printf \"security targets: security-node\\n\"'"
+      },
+      "metadata": {
+        "supervisorRequired": true
+      }
+    }
+  },
+  "tags": [
+    "scope:repos",
+    "type:subrepo",
+    "lang:node"
+  ]
+}
